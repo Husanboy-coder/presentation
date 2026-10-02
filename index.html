@@ -1,0 +1,3304 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="cyber-blue">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yotoqxonadagi suv quvurlarini aqlli monitoring qilish — Muhandislik Taqdimoti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=Raleway:wght@400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Prata&family=Raleway:wght@400;500;600;700&family=Syne:wght@400;700;800&display=swap');
+
+    /* =====================================================================
+       DESIGN SYSTEM & THEME TEMPLATES (Gamma-inspired aesthetic palettes)
+       ===================================================================== */
+    
+    /* 1. CYBER BLUE (Default - Deep Navy & Electric Cyan IoT) */
+    :root, [data-theme="cyber-blue"] {
+      --theme-name: "Cyber Blue";
+      --bg-dark: #070d18;
+      --bg-stage: #0c1527;
+      --bg-card: rgba(18, 30, 52, 0.72);
+      --bg-card-hover: rgba(28, 45, 77, 0.9);
+      --bg-card-inner: rgba(10, 19, 36, 0.7);
+
+      --border-subtle: rgba(148, 163, 184, 0.16);
+      --border-glow: rgba(56, 189, 248, 0.4);
+      --border-accent: rgba(6, 182, 212, 0.3);
+
+      --primary: #0284c7;
+      --primary-light: #38bdf8;
+      --accent-cyan: #06b6d4;
+      --accent-teal: #14b8a6;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #ff0000;
+      --accent-indigo: #6366f1;
+      --accent-purple: #a855f7;
+
+      --text-pure: #ffffff;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+      --shadow-glow: 0 0 25px rgba(56, 189, 248, 0.22);
+      --canvas-glow-1: rgba(2, 132, 199, 0.12);
+      --canvas-glow-2: rgba(66, 182, 212, 0.08);
+      --grid-line: rgba(255, 255, 255, 0.02);
+    }
+
+    /* 2. GAMMA CLEAN LIGHT (Minimalist White & Editorial Elegance) */
+    [data-theme="gamma-light"] {
+      --theme-name: "Gamma Light";
+      --bg-dark: #eef2f7;
+      --bg-stage: #ffffff;
+      --bg-card: rgba(248, 250, 252, 0.92);
+      --bg-card-hover: #ffffff;
+      --bg-card-inner: #f1f5f9;
+
+      --border-subtle: rgba(15, 23, 42, 0.1);
+      --border-glow: rgba(2, 132, 199, 0.4);
+      --border-accent: rgba(2, 132, 199, 0.25);
+
+      --primary: #0284c7;
+      --primary-light: #0284c7;
+      --accent-cyan: #0284c7;
+      --accent-teal: #0d9488;
+      --accent-emerald: #059669;
+      --accent-amber: #d97706;
+      --accent-rose: #d50000;
+      --accent-indigo: #4f46e5;
+      --accent-purple: #9333ea;
+
+      --text-pure: #0f172a;
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+
+      --shadow-card: 0 6px 20px -3px rgba(15, 23, 42, 0.07), 0 1px 3px rgba(15, 23, 42, 0.04);
+      --shadow-glow: 0 0 20px rgba(2, 132, 199, 0.14);
+      --canvas-glow-1: rgba(2, 132, 199, 0.06);
+      --canvas-glow-2: rgba(14, 165, 233, 0.04);
+      --grid-line: rgba(15, 23, 42, 0.04);
+    }
+
+    /* 3. NORDIC CHARCOAL (Gamma Obsidian / Minimalist Matte Graphite) */
+    [data-theme="nordic-charcoal"] {
+      --theme-name: "Nordic Charcoal";
+      --bg-dark: #0f1013;
+      --bg-stage: #17181d;
+      --bg-card: rgba(28, 30, 36, 0.75);
+      --bg-card-hover: rgba(38, 41, 50, 0.9);
+      --bg-card-inner: rgba(20, 21, 26, 0.8);
+
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-glow: rgba(161, 161, 170, 0.35);
+      --border-accent: rgba(56, 189, 248, 0.3);
+
+      --primary: #3f3f46;
+      --primary-light: #e4e4e7;
+      --accent-cyan: #38bdf8;
+      --accent-teal: #2dd4bf;
+      --accent-emerald: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-rose: #ff1744;
+      --accent-indigo: #818cf8;
+      --accent-purple: #c084fc;
+
+      --text-pure: #ffffff;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+
+      --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.65), 0 0 1px 1px rgba(255, 255, 255, 0.06);
+      --shadow-glow: 0 0 25px rgba(255, 255, 255, 0.09);
+      --canvas-glow-1: rgba(161, 161, 170, 0.08);
+      --canvas-glow-2: rgba(56, 189, 248, 0.06);
+      --grid-line: rgba(255, 255, 255, 0.02);
+    }
+
+    /* 4. ONYX (Gamma Official - Luxury Pure Black & White) */
+    [data-theme="onyx"] {
+      --theme-name: "Onyx";
+      --bg-dark: #181A1B;               /* Page background */
+      --bg-stage: #111213;              /* Background color */
+      --bg-card: rgba(29, 31, 34, 0.78); /* Secondary accent #1D1F22 container */
+      --bg-card-hover: rgba(42, 45, 50, 0.95);
+      --bg-card-inner: #1D1F22;          /* Secondary accent */
+
+      --border-subtle: rgba(255, 255, 255, 0.15);
+      --border-glow: rgba(255, 255, 255, 0.45);
+      --border-accent: rgba(255, 255, 255, 0.25);
+
+      --primary: #FFFFFF;               /* Primary accent color */
+      --primary-light: #FFFFFF;
+      --accent-cyan: #FFFFFF;           /* Eyebrow, Label, Link, Button */
+      --accent-teal: #E2E6E9;
+      --accent-emerald: #FFFFFF;
+      --accent-amber: #FFFFFF;
+      --accent-rose: #FFFFFF;
+      --accent-indigo: #E2E6E9;
+      --accent-purple: #FFFFFF;
+
+      --text-pure: #FFFFFF;             /* Heading, Subheading, Eyebrow, Label, Link */
+      --text-main: #E2E6E9;             /* Body color, Caption color */
+      --text-muted: #E2E6E9;            /* Caption color */
+      --text-dim: #9aa1a7;
+
+      --heading-color: #FFFFFF;
+      --subheading-color: #FFFFFF;
+      --body-color: #E2E6E9;
+      --eyebrow-color: #FFFFFF;
+      --caption-color: #E2E6E9;
+      --label-color: #FFFFFF;
+      --link-color: #FFFFFF;
+      --button-color: #FFFFFF;
+
+      --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(255, 255, 255, 0.08);
+      --shadow-glow: 0 0 25px rgba(255, 255, 255, 0.18);
+      --canvas-glow-1: rgba(255, 255, 255, 0.05);
+      --canvas-glow-2: rgba(226, 230, 233, 0.03);
+      --grid-line: rgba(255, 255, 255, 0.03);
+    }
+
+    /* 5. ALIEN (Gamma Official - Sci-Fi Matrix Neon Lime & Dark Slate) */
+    [data-theme="alien"] {
+      --theme-name: "Alien";
+      --bg-dark: #152025;               /* Background color */
+      --bg-stage: rgba(21, 32, 37, 0.88); /* Page background: no star 3.png backdrop */
+      --bg-card: rgba(17, 26, 35, 0.85); /* Secondary accent: #111A23 */
+      --bg-card-hover: rgba(26, 40, 52, 0.95);
+      --bg-card-inner: #111A23;          /* Secondary accent */
+
+      --border-subtle: rgba(169, 240, 15, 0.2);
+      --border-glow: rgba(169, 240, 15, 0.5);
+      --border-accent: rgba(129, 182, 28, 0.35);
+
+      --primary: #A9F00F;               /* Primary accent color: #A9F00F */
+      --primary-light: #A9F00F;
+      --accent-cyan: #A9F00F;           /* Eyebrow, Label, Link, Button */
+      --accent-teal: #81B61C;           /* Secondary accent: #81B61C */
+      --accent-emerald: #A9F00F;
+      --accent-amber: #81B61C;
+      --accent-rose: #ff1744;
+      --accent-indigo: #81B61C;
+      --accent-purple: #547808;         /* Secondary accent: #547808 */
+
+      --text-pure: #F0F4F1;             /* Heading, Subheading */
+      --text-main: #D7E5D8;             /* Body color */
+      --text-muted: #D7E5D8;            /* Caption color */
+      --text-dim: #8fa693;
+
+      --heading-color: #F0F4F1;
+      --subheading-color: #F0F4F1;
+      --body-color: #D7E5D8;
+      --eyebrow-color: #A9F00F;
+      --caption-color: #D7E5D8;
+      --label-color: #A9F00F;
+      --link-color: #A9F00F;
+      --button-color: #A9F00F;
+
+      --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(169, 240, 15, 0.15);
+      --shadow-glow: 0 0 25px rgba(169, 240, 15, 0.3);
+      --canvas-glow-1: rgba(169, 240, 15, 0.14);
+      --canvas-glow-2: rgba(129, 182, 28, 0.08);
+      --grid-line: rgba(169, 240, 15, 0.04);
+    }
+
+    /* 6. AURUM (Gamma Official - Luxury Gold & Obsidian Poly) */
+    [data-theme="aurum"] {
+      --theme-name: "Aurum";
+      --bg-dark: #1B1C1D;               /* Background color */
+      --bg-stage: rgba(27, 28, 29, 0.88); /* Page background: NY-bg-10-up.png backdrop */
+      --bg-card: rgba(22, 22, 24, 0.85);
+      --bg-card-hover: rgba(36, 37, 40, 0.95);
+      --bg-card-inner: #0D0D09;          /* Secondary accent: #0D0D09 */
+
+      --border-subtle: rgba(210, 172, 71, 0.24);
+      --border-glow: rgba(247, 239, 138, 0.45);
+      --border-accent: rgba(244, 232, 131, 0.35);
+
+      --primary: #D2AC47;               /* Primary accent solid */
+      --primary-light: #F7EF8A;
+      --accent-cyan: #EEE27D;           /* Eyebrow, Label, Link */
+      --accent-teal: #F4E883;           /* Secondary accent: #F4E883 */
+      --accent-emerald: #F7EF8A;
+      --accent-amber: #D2AC47;
+      --accent-rose: #ff1744;
+      --accent-indigo: #F2E782;
+      --accent-purple: #AE8625;
+
+      --text-pure: #F7EF8A;             /* Heading fallback */
+      --text-main: #CFCBBF;             /* Body color */
+      --text-muted: #CFCBBF;            /* Caption color */
+      --text-dim: #959082;
+
+      --heading-color: #F7EF8A;
+      --subheading-color: #F2E782;
+      --body-color: #CFCBBF;
+      --eyebrow-color: #EEE27D;
+      --caption-color: #CFCBBF;
+      --label-color: #EEE27D;
+      --link-color: #EEE27D;
+      --button-color: #D2AC47;
+
+      --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(210, 172, 71, 0.15);
+      --shadow-glow: 0 0 25px rgba(247, 239, 138, 0.25);
+      --canvas-glow-1: rgba(210, 172, 71, 0.12);
+      --canvas-glow-2: rgba(247, 239, 138, 0.08);
+      --grid-line: rgba(210, 172, 71, 0.04);
+    }
+
+    /* 7. SHADOW (Gamma Official - Minimalist Graphite & Smoke) */
+    [data-theme="shadow"] {
+      --theme-name: "Shadow";
+      --bg-dark: #181616;               /* Page background */
+      --bg-stage: #181616;              /* Background color */
+      --bg-card: rgba(28, 25, 25, 0.88);
+      --bg-card-hover: rgba(38, 35, 35, 0.96);
+      --bg-card-inner: #121010;
+
+      --border-subtle: #424242;         /* Secondary accent: #424242 */
+      --border-glow: rgba(255, 255, 255, 0.35);
+      --border-accent: rgba(143, 143, 143, 0.35);
+
+      --primary: #FFFFFF;               /* Primary accent: #FFFFFF */
+      --primary-light: #FFFFFF;
+      --accent-cyan: #FFFFFF;           /* Eyebrow, Label, Link, Button */
+      --accent-teal: #8F8F8F;           /* Secondary accent: #8F8F8F */
+      --accent-emerald: #DDDDDD;
+      --accent-amber: #FFFFFF;
+      --accent-rose: #FFFFFF;
+      --accent-indigo: #8F8F8F;
+      --accent-purple: #424242;
+
+      --text-pure: #DDDDDD;             /* Heading, Subheading */
+      --text-main: #8F8F8F;             /* Body color */
+      --text-muted: #8F8F8F;            /* Caption color */
+      --text-dim: #616161;
+
+      --heading-color: #DDDDDD;
+      --subheading-color: #DDDDDD;
+      --body-color: #8F8F8F;
+      --eyebrow-color: #FFFFFF;
+      --caption-color: #8F8F8F;
+      --label-color: #FFFFFF;
+      --link-color: #FFFFFF;
+      --button-color: #FFFFFF;
+
+      --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.8), 0 0 1px 1px #424242;
+      --shadow-glow: 0 0 25px rgba(255, 255, 255, 0.1);
+      --canvas-glow-1: rgba(143, 143, 143, 0.05);
+      --canvas-glow-2: rgba(66, 66, 66, 0.08);
+      --grid-line: rgba(66, 66, 66, 0.25);
+    }
+
+    /* 8. EMERALD OASIS (Gamma Sage / Green Eco-Engineering) */
+    [data-theme="emerald-oasis"] {
+      --theme-name: "Emerald Oasis";
+      --bg-dark: #06120e;
+      --bg-stage: #0a1c15;
+      --bg-card: rgba(16, 36, 29, 0.72);
+      --bg-card-hover: rgba(24, 52, 42, 0.9);
+      --bg-card-inner: rgba(8, 23, 17, 0.75);
+
+      --border-subtle: rgba(52, 211, 153, 0.16);
+      --border-glow: rgba(52, 211, 153, 0.4);
+      --border-accent: rgba(16, 185, 129, 0.3);
+
+      --primary: #059669;
+      --primary-light: #34d399;
+      --accent-cyan: #2dd4bf;
+      --accent-teal: #14b8a6;
+      --accent-emerald: #10b981;
+      --accent-amber: #fbbf24;
+      --accent-rose: #ff1744;
+      --accent-indigo: #6ee7b7;
+      --accent-purple: #a7f3d0;
+
+      --text-pure: #ffffff;
+      --text-main: #ecfdf5;
+      --text-muted: #a7f3d0;
+      --text-dim: #6ee7b7;
+
+      --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(52, 211, 153, 0.1);
+      --shadow-glow: 0 0 25px rgba(16, 185, 129, 0.22);
+      --canvas-glow-1: rgba(16, 185, 129, 0.12);
+      --canvas-glow-2: rgba(45, 212, 191, 0.08);
+      --grid-line: rgba(52, 211, 153, 0.03);
+    }
+
+    /* 9. SUNSET SOLAR (Gamma Solar / Amber & Warm Terracotta) */
+    [data-theme="sunset-solar"] {
+      --theme-name: "Sunset Solar";
+      --bg-dark: #150d12;
+      --bg-stage: #1e131b;
+      --bg-card: rgba(42, 24, 38, 0.75);
+      --bg-card-hover: rgba(60, 34, 54, 0.9);
+      --bg-card-inner: rgba(25, 14, 23, 0.75);
+
+      --border-subtle: rgba(251, 146, 60, 0.18);
+      --border-glow: rgba(251, 146, 60, 0.4);
+      --border-accent: rgba(245, 158, 11, 0.3);
+
+      --primary: #ea580c;
+      --primary-light: #fb923c;
+      --accent-cyan: #f59e0b;
+      --accent-teal: #2dd4bf;
+      --accent-emerald: #34d399;
+      --accent-amber: #f59e0b;
+      --accent-rose: #ff1744;
+      --accent-indigo: #fb7185;
+      --accent-purple: #f472b6;
+
+      --text-pure: #ffffff;
+      --text-main: #fff7ed;
+      --text-muted: #fed7aa;
+      --text-dim: #fdba74;
+
+      --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(251, 146, 60, 0.1);
+      --shadow-glow: 0 0 25px rgba(245, 158, 11, 0.22);
+      --canvas-glow-1: rgba(234, 88, 12, 0.12);
+      --canvas-glow-2: rgba(245, 158, 11, 0.08);
+      --grid-line: rgba(251, 146, 60, 0.03);
+    }
+
+    /* 10. COSMIC AMETHYST (Gamma Galaxy / Deep Violet & Lavender) */
+    [data-theme="cosmic-amethyst"] {
+      --theme-name: "Cosmic Amethyst";
+      --bg-dark: #0d0a1b;
+      --bg-stage: #15102a;
+      --bg-card: rgba(33, 24, 62, 0.75);
+      --bg-card-hover: rgba(48, 36, 90, 0.9);
+      --bg-card-inner: rgba(19, 14, 38, 0.75);
+
+      --border-subtle: rgba(192, 132, 252, 0.18);
+      --border-glow: rgba(192, 132, 252, 0.4);
+      --border-accent: rgba(168, 85, 247, 0.3);
+
+      --primary: #9333ea;
+      --primary-light: #c084fc;
+      --accent-cyan: #38bdf8;
+      --accent-teal: #2dd4bf;
+      --accent-emerald: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-rose: #ff1744;
+      --accent-indigo: #a855f7;
+      --accent-purple: #c084fc;
+
+      --text-pure: #ffffff;
+      --text-main: #faf5ff;
+      --text-muted: #e9d5ff;
+      --text-dim: #d8b4fe;
+
+      --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(192, 132, 252, 0.1);
+      --shadow-glow: 0 0 25px rgba(168, 85, 247, 0.25);
+      --canvas-glow-1: rgba(147, 51, 234, 0.12);
+      --canvas-glow-2: rgba(56, 189, 248, 0.08);
+      --grid-line: rgba(192, 132, 252, 0.03);
+    }
+
+    /* Base Font & Element Rules */
+    :root {
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: none;
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-family);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* Ambient Dynamic Backdrop Grid */
+    .ambient-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 15% 20%, var(--canvas-glow-1) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, var(--canvas-glow-2) 0%, transparent 45%),
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      transition: background 0.4s ease;
+    }
+
+    /* Presentation Deck Shell */
+    .deck-container {
+      position: relative;
+      z-index: 10;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 28px 20px;
+    }
+
+    /* Topbar Navigation */
+    .deck-topbar {
+      width: 100%;
+      max-width: 1540px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .project-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      transition: var(--transition);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+      animation: pulse-ring 2s infinite;
+    }
+
+    .topbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+
+    .btn-tool {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-tool:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-pure);
+      border-color: var(--primary-light);
+    }
+    .btn-tool.active {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      background: var(--bg-card-inner);
+    }
+
+    .timer-badge {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--primary-light);
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-subtle);
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* =====================================================================
+       THEME PICKER DROPDOWN POPOVER
+       ===================================================================== */
+    .theme-dropdown {
+      position: absolute;
+      top: 44px;
+      right: 170px;
+      width: 350px;
+      max-height: 480px;
+      overflow-y: auto;
+      background: var(--bg-stage);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-glow);
+      backdrop-filter: blur(20px);
+      padding: 14px;
+      z-index: 90;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px) scale(0.97);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .theme-dropdown.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .theme-dropdown-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-pure);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .theme-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .theme-option-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: var(--transition);
+      background: var(--bg-card);
+    }
+    .theme-option-row:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-glow);
+    }
+    .theme-option-row.active {
+      border-color: var(--primary-light);
+      background: var(--bg-card-inner);
+    }
+
+    .theme-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .theme-swatch-circles {
+      display: flex;
+      align-items: center;
+    }
+    .swatch-circle {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1.5px solid var(--bg-stage);
+      margin-right: -4px;
+    }
+
+    .theme-label-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-pure);
+    }
+    .theme-label-desc {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .theme-check-icon {
+      color: var(--accent-cyan);
+      opacity: 0;
+      font-weight: bold;
+    }
+    .theme-option-row.active .theme-check-icon {
+      opacity: 1;
+    }
+
+    /* =====================================================================
+       MAIN PRESENTATION STAGE (16:9 Frame)
+       ===================================================================== */
+    .deck-stage {
+      position: relative;
+      width: 100%;
+      max-width: 1540px;
+      flex: 1;
+      aspect-ratio: 16 / 9;
+      max-height: calc(100vh - 110px);
+      background: var(--bg-stage);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.4), 0 0 1px 1px var(--border-glow);
+      overflow: hidden;
+      display: flex;
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+
+    /* Slide Views */
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 34px 50px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(30px) scale(0.99);
+      transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.38s;
+      pointer-events: none;
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+      z-index: 2;
+    }
+
+    .slide.prev {
+      transform: translateX(-30px) scale(0.99);
+    }
+
+    /* Slide Typography */
+    .slide-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .slide-number-pill {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-accent);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .slide-topic-title {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    .slide-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--text-pure);
+      letter-spacing: -0.02em;
+      line-height: 1.22;
+      margin-bottom: 6px;
+    }
+
+    .slide-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      max-width: 980px;
+      margin-bottom: 18px;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Grids & Cards */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+      position: relative;
+    }
+    .card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-glow);
+      transform: translateY(-2px);
+    }
+    .card-highlight {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
+      border-color: var(--border-glow);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .card-heading {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--text-pure);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    /* Micro Badges */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .tag-blue { background: rgba(2, 132, 199, 0.16); color: var(--primary-light); border: 1px solid rgba(56, 189, 248, 0.35); }
+    .tag-emerald { background: rgba(16, 185, 129, 0.16); color: var(--accent-emerald); border: 1px solid rgba(52, 211, 153, 0.35); }
+    .tag-amber { background: rgba(245, 158, 11, 0.16); color: var(--accent-amber); border: 1px solid rgba(251, 191, 36, 0.35); }
+    .tag-rose { background: rgba(255, 23, 68, 0.2); color: var(--accent-rose); border: 1px solid rgba(255, 23, 68, 0.55); font-weight: 700; box-shadow: 0 0 10px rgba(255, 23, 68, 0.25); }
+    .tag-cyan { background: rgba(6, 182, 212, 0.16); color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.35); }
+    .tag-purple { background: rgba(168, 85, 247, 0.16); color: var(--accent-purple); border: 1px solid rgba(168, 85, 247, 0.35); }
+
+    /* Light Theme Contrast Tweaks */
+    [data-theme="gamma-light"] .tag-blue { background: rgba(2, 132, 199, 0.1); color: #0284c7; border-color: rgba(2, 132, 199, 0.3); }
+    [data-theme="gamma-light"] .tag-emerald { background: rgba(16, 185, 129, 0.1); color: #059669; border-color: rgba(16, 185, 129, 0.3); }
+    [data-theme="gamma-light"] .tag-amber { background: rgba(245, 158, 11, 0.1); color: #b45309; border-color: rgba(245, 158, 11, 0.3); }
+    [data-theme="gamma-light"] .tag-rose { background: rgba(255, 23, 68, 0.14); color: #d50000; border-color: rgba(255, 23, 68, 0.55); font-weight: 700; }
+    [data-theme="gamma-light"] .tag-cyan { background: rgba(6, 182, 212, 0.1); color: #0e7490; border-color: rgba(6, 182, 212, 0.3); }
+
+    /* =====================================================================
+       GAMMA THEMES SPECIFIC STYLES & OVERRIDES (Onyx, Alien, Aurum, Shadow)
+       ===================================================================== */
+
+    /* --- 4. ONYX (Gamma Official - Font Gradient) --- */
+    html[data-theme="onyx"] body {
+      background-color: #181A1B;
+      background-image: none;
+    }
+    html[data-theme="onyx"] .deck-stage {
+      background: #111213;
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(255, 255, 255, 0.1);
+    }
+    /* Headings font gradient */
+    html[data-theme="onyx"] .slide-title {
+      background: linear-gradient(135deg, #FFFFFF 15%, #E2E6E9 55%, #9EA6AD 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      padding-bottom: 2px;
+      color: #FFFFFF;
+    }
+    html[data-theme="onyx"] .slide-title span {
+      background: linear-gradient(135deg, #FFFFFF 0%, #D8DDE2 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    html[data-theme="onyx"] .slide-subtitle {
+      color: #FFFFFF;
+    }
+    html[data-theme="onyx"] .slide-number-pill,
+    html[data-theme="onyx"] .slide-topic-title {
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+    html[data-theme="onyx"] .btn-nav {
+      background: #FFFFFF;
+      color: #111213;
+      border-color: #FFFFFF;
+      font-weight: 700;
+    }
+    html[data-theme="onyx"] .btn-nav:hover {
+      background: #E2E6E9;
+      color: #111213;
+    }
+    html[data-theme="onyx"] .btn-tool.active {
+      background: #1D1F22;
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+    }
+    html[data-theme="onyx"] .tag {
+      background: #1D1F22;
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* --- 5. ALIEN (Gamma Official - Upscaled BG, Syne Typography & Font Gradient) --- */
+    html[data-theme="alien"] body {
+      font-family: 'Syne', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-weight: 400;
+      font-size: 14pt;
+      letter-spacing: 0;
+      line-height: 1.45;
+      background-color: #152025;
+      background-image: url('assets/no-star-3.png');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+    html[data-theme="alien"] .deck-stage {
+      background: rgba(21, 32, 37, 0.88);
+      backdrop-filter: blur(20px);
+      border-color: rgba(169, 240, 15, 0.35);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.65), 0 0 25px rgba(169, 240, 15, 0.22);
+    }
+    html[data-theme="alien"] .ambient-canvas {
+      opacity: 0.15;
+    }
+
+    /* Alien Headings: Syne Extra Bold (800), line-height 1.25, letter-spacing 0, Gradient */
+    html[data-theme="alien"] .slide-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.85rem, 2.3vw, 32pt);
+      line-height: 1.25;
+      letter-spacing: 0;
+      background: linear-gradient(135deg, #FFFFFF 10%, #F0F4F1 40%, #A9F00F 95%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      padding-bottom: 2px;
+      color: #F0F4F1;
+    }
+    html[data-theme="alien"] h1.slide-title {
+      font-size: clamp(2.3rem, 3.2vw, 48pt) !important;
+      line-height: 1.25 !important;
+    }
+    html[data-theme="alien"] .slide-title span {
+      background: linear-gradient(90deg, #A9F00F, #81B61C) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+
+    /* Alien Card Headings: Syne Extra Bold (800), line-height 1.25, 16pt */
+    html[data-theme="alien"] .card-heading {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 16pt;
+      line-height: 1.25;
+      letter-spacing: 0;
+      color: #F0F4F1;
+    }
+
+    /* Alien Subheading / Body Large: Syne Regular (400), 16pt */
+    html[data-theme="alien"] .slide-subtitle {
+      font-family: 'Syne', sans-serif;
+      font-weight: 400;
+      font-size: 16pt;
+      line-height: 1.35;
+      letter-spacing: 0;
+      color: #F0F4F1;
+    }
+
+    /* Alien Eyebrow: Syne Regular (400), 11pt, letter-spacing 0 */
+    html[data-theme="alien"] .slide-number-pill,
+    html[data-theme="alien"] .slide-topic-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 400;
+      font-size: 11pt;
+      letter-spacing: 0;
+      text-transform: none;
+      color: #A9F00F;
+      border-color: rgba(169, 240, 15, 0.4);
+    }
+
+    /* Alien Body Medium (14pt) & Small (11pt) */
+    html[data-theme="alien"] .card {
+      font-family: 'Syne', sans-serif;
+      font-weight: 400;
+      font-size: 14pt;
+      line-height: 1.45;
+      letter-spacing: 0;
+      color: #D7E5D8;
+    }
+    html[data-theme="alien"] .card p,
+    html[data-theme="alien"] .card div,
+    html[data-theme="alien"] .card span {
+      letter-spacing: 0;
+    }
+
+    html[data-theme="alien"] .tag {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 11pt;
+      letter-spacing: 0;
+      background: rgba(84, 120, 8, 0.28);
+      color: #A9F00F;
+      border-color: rgba(169, 240, 15, 0.35);
+    }
+
+    html[data-theme="alien"] .btn-nav {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 14pt;
+      letter-spacing: 0;
+      background: #A9F00F;
+      color: #111A23;
+      border-color: #A9F00F;
+    }
+    html[data-theme="alien"] .btn-nav:hover {
+      background: #81B61C;
+      color: #111A23;
+      border-color: #81B61C;
+    }
+    html[data-theme="alien"] .btn-tool {
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 0;
+    }
+    html[data-theme="alien"] .btn-tool.active {
+      background: #111A23;
+      color: #A9F00F;
+      border-color: #A9F00F;
+    }
+    html[data-theme="alien"] .deck-progress-fill {
+      background: linear-gradient(90deg, #547808, #81B61C, #A9F00F);
+      box-shadow: 0 0 10px #A9F00F;
+    }
+
+    /* --- 6. AURUM (Gamma Official - Upscaled BG, Prata & Raleway Typography, Font Gradient) --- */
+    html[data-theme="aurum"] body {
+      font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-weight: 400;
+      font-size: 14pt;
+      letter-spacing: 0;
+      line-height: 1.5;
+      background-color: #1B1C1D;
+      background-image: url('assets/NY-bg-10-up.png');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+    html[data-theme="aurum"] .deck-stage {
+      background: rgba(27, 28, 29, 0.88);
+      backdrop-filter: blur(18px);
+      border-color: rgba(210, 172, 71, 0.38);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(247, 239, 138, 0.2);
+    }
+    html[data-theme="aurum"] .ambient-canvas {
+      opacity: 0.18;
+    }
+
+    /* Aurum Headings (H1, H2): Prata Regular (400), line-height 1.25, letter-spacing 0, Metallic Gold Gradient */
+    html[data-theme="aurum"] .slide-title {
+      font-family: 'Prata', serif;
+      font-weight: 400;
+      font-size: clamp(1.85rem, 2.3vw, 32pt);
+      line-height: 1.25;
+      letter-spacing: 0;
+      background: linear-gradient(135deg, #AE8625 5%, #F7EF8A 45%, #D2AC47 85%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      padding-bottom: 2px;
+      color: #F7EF8A;
+    }
+    html[data-theme="aurum"] h1.slide-title {
+      font-size: clamp(2.3rem, 3.2vw, 48pt) !important;
+      line-height: 1.25 !important;
+    }
+    html[data-theme="aurum"] .slide-title span {
+      background: linear-gradient(90deg, #F7EF8A, #D2AC47) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+
+    /* Aurum Subheading (H3 / H4 / Card Headings): Prata Regular (400), H3: 20pt, H4: 17pt */
+    html[data-theme="aurum"] .card-heading {
+      font-family: 'Prata', serif;
+      font-weight: 400;
+      font-size: 20pt;
+      line-height: 1.3;
+      letter-spacing: 0;
+      color: #F4E883;
+    }
+
+    /* Aurum Subtitle / Body Large: Raleway Regular (400), 16pt */
+    html[data-theme="aurum"] .slide-subtitle {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 16pt;
+      line-height: 1.45;
+      letter-spacing: 0;
+      color: #F2E782;
+    }
+
+    /* Aurum Eyebrow / Badges: Raleway (400/600), 11pt, letter-spacing 0 */
+    html[data-theme="aurum"] .slide-number-pill,
+    html[data-theme="aurum"] .slide-topic-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 11pt;
+      letter-spacing: 0.03em;
+      text-transform: none;
+      color: #EEE27D;
+      border-color: rgba(238, 226, 125, 0.4);
+    }
+
+    /* Aurum Body Medium (14pt) & Small (11pt): Raleway Regular (400) */
+    html[data-theme="aurum"] .card {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 14pt;
+      line-height: 1.5;
+      letter-spacing: 0;
+      color: #CFCBBF;
+    }
+    html[data-theme="aurum"] .card p,
+    html[data-theme="aurum"] .card div,
+    html[data-theme="aurum"] .card span {
+      letter-spacing: 0;
+    }
+
+    html[data-theme="aurum"] .tag {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 11pt;
+      letter-spacing: 0;
+      background: rgba(210, 172, 71, 0.2);
+      color: #F4E883;
+      border-color: rgba(247, 239, 138, 0.38);
+    }
+
+    html[data-theme="aurum"] .btn-nav {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 14pt;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #D2AC47 5%, #F7EF8A 45%, #AE8625 85%);
+      color: #0D0D09;
+      border: none;
+    }
+    html[data-theme="aurum"] .btn-nav:hover {
+      filter: brightness(1.12);
+      transform: translateY(-1px);
+    }
+    html[data-theme="aurum"] .btn-tool {
+      font-family: 'Raleway', sans-serif;
+      letter-spacing: 0;
+    }
+    html[data-theme="aurum"] .btn-tool.active {
+      background: #0D0D09;
+      color: #F7EF8A;
+      border-color: #F7EF8A;
+    }
+    html[data-theme="aurum"] .deck-progress-fill {
+      background: linear-gradient(90deg, #AE8625, #F7EF8A, #D2AC47);
+      box-shadow: 0 0 10px rgba(247, 239, 138, 0.6);
+    }
+
+    /* --- 7. SHADOW (Gamma Official - Font Gradient) --- */
+    html[data-theme="shadow"] body {
+      background-color: #181616;
+      background-image: none;
+    }
+    html[data-theme="shadow"] .deck-stage {
+      background: #181616;
+      border-color: #424242;
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px #424242;
+    }
+    /* Headings font gradient */
+    html[data-theme="shadow"] .slide-title {
+      background: linear-gradient(135deg, #FFFFFF 10%, #DDDDDD 50%, #8F8F8F 95%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      padding-bottom: 2px;
+      color: #DDDDDD;
+    }
+    html[data-theme="shadow"] .slide-title span {
+      background: linear-gradient(135deg, #FFFFFF 0%, #B8B8B8 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    html[data-theme="shadow"] .slide-subtitle {
+      color: #DDDDDD;
+    }
+    html[data-theme="shadow"] .slide-number-pill,
+    html[data-theme="shadow"] .slide-topic-title {
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    html[data-theme="shadow"] .btn-nav {
+      background: #FFFFFF;
+      color: #181616;
+      border-color: #FFFFFF;
+      font-weight: 700;
+    }
+    html[data-theme="shadow"] .btn-nav:hover {
+      background: #DDDDDD;
+      color: #181616;
+    }
+    html[data-theme="shadow"] .card {
+      background: rgba(24, 22, 22, 0.9);
+      border-color: #424242;
+    }
+    html[data-theme="shadow"] .card-heading {
+      color: #DDDDDD;
+    }
+    html[data-theme="shadow"] .btn-tool.active {
+      background: #141212;
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+    }
+    html[data-theme="shadow"] .deck-progress-fill {
+      background: linear-gradient(90deg, #424242, #8F8F8F, #FFFFFF);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    }
+    html[data-theme="shadow"] .tag {
+      background: rgba(66, 66, 66, 0.45);
+      color: #DDDDDD;
+      border-color: #424242;
+    }
+
+    /* Bottom Controller */
+    .deck-bottombar {
+      width: 100%;
+      max-width: 1540px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .slide-counter-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .slide-digits {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .slide-digits strong {
+      color: var(--primary-light);
+      font-size: 1.1rem;
+    }
+
+    .deck-progress-track {
+      width: 220px;
+      height: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .deck-progress-fill {
+      height: 100%;
+      width: 6.66%;
+      background: linear-gradient(90deg, var(--primary), var(--accent-cyan));
+      border-radius: var(--radius-full);
+      transition: width 0.35s ease;
+      box-shadow: 0 0 8px var(--accent-cyan);
+    }
+
+    .key-shortcuts-badge {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .k-key {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    .nav-buttons-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-nav {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      border-radius: var(--radius-sm);
+      padding: 8px 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-nav:hover {
+      background: var(--primary);
+      border-color: var(--primary-light);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .btn-nav:disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* Keyframes */
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.35); opacity: 1; }
+    }
+
+    /* Laser Pointer Dot - Ultra Bright Red Diode */
+    #laserPointer {
+      position: fixed;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ff0000;
+      box-shadow: 0 0 10px 4px #ff0000, 0 0 22px 8px #ff1744, 0 0 40px 12px rgba(255, 0, 0, 0.9);
+      border: 1.5px solid #ffffff;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+
+    /* Overview Modal */
+    .overview-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 10, 20, 0.88);
+      backdrop-filter: blur(16px);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 36px 50px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    [data-theme="gamma-light"] .overview-modal {
+      background: rgba(240, 243, 248, 0.92);
+    }
+    .overview-modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .overview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      max-width: 1400px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      overflow-y: auto;
+      padding-bottom: 30px;
+    }
+    .overview-card {
+      background: var(--bg-stage);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .overview-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-glow);
+    }
+    .overview-card.active {
+      border-color: var(--primary-light);
+      background: var(--bg-card);
+    }
+    .overview-card .num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .overview-card .title {
+      font-size: 0.92rem;
+      color: var(--text-pure);
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    /* Print Setup */
+    @media print {
+      body { overflow: visible; background: #fff; color: #000; }
+      .deck-stage { box-shadow: none; border: none; max-height: none; height: auto; }
+      .slide {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        page-break-after: always;
+        height: 100vh;
+        background: #fff;
+        color: #000;
+      }
+      .deck-topbar, .deck-bottombar, .ambient-canvas, .overview-modal, #laserPointer, .theme-dropdown {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Dynamic Canvas -->
+  <div class="ambient-canvas"></div>
+  <div id="laserPointer"></div>
+
+  <!-- Deck Shell -->
+  <div class="deck-container">
+    
+    <!-- Top Bar Controls -->
+    <header class="deck-topbar">
+      <div class="project-pill">
+        <span class="live-dot"></span>
+        <strong style="color: var(--primary-light);">MUHANDISLIK LOYIHASI</strong>
+        <span style="color: var(--text-dim);">&bull;</span>
+        <span style="color: var(--text-muted);">IoT & Aqlli Bino Infratuzilmasi</span>
+      </div>
+
+      <div class="topbar-controls">
+        <!-- Presentation Timer -->
+        <div class="timer-badge" id="timerBadge" title="Taqdimot vaqti (bosilsa to‘xtaydi/davom etadi)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="timerText">00:00</span>
+        </div>
+
+        <!-- Theme Picker Trigger Button -->
+        <button class="btn-tool" id="btnThemePicker" title="Dizayn mavzusini o‘zgartirish (T)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+          <span>Mavzu: <strong id="activeThemeLabel">Cyber Blue</strong></span>
+        </button>
+
+        <!-- Laser Pointer Toggle -->
+        <button class="btn-tool" id="btnLaser" title="Lazer ko‘rsatkich (L)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+          Lazer
+        </button>
+
+        <!-- Sound Toggle -->
+        <button class="btn-tool" id="btnSound" title="Ovoz effektlari (S)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          Ovoz: Yoqiq
+        </button>
+
+        <!-- Slide Overview Drawer -->
+        <button class="btn-tool" id="btnOverview" title="Slaydlar rejasi (O)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Reja
+        </button>
+
+        <!-- Fullscreen Toggle -->
+        <button class="btn-tool" id="btnFullscreen" title="To‘liq ekran (F)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          Ekran
+        </button>
+
+        <!-- Floating Theme Selector Dropdown Menu (10 Themes) -->
+        <div class="theme-dropdown" id="themeDropdown">
+          <div class="theme-dropdown-header">
+            <span>Dizayn Mavzulari (10 xil Gamma)</span>
+            <span class="k-key">T</span>
+          </div>
+          <div class="theme-options-list">
+            <!-- 1. Cyber Blue -->
+            <div class="theme-option-row active" data-theme-id="cyber-blue">
+              <div class="theme-info">
+                <div class="theme-swatch-circles">
+                  <span class="swatch-circle" style="background: #070d18;"></span>
+                  <span class="swatch-circle" style="background: #0c1527;"></span>
+                  <span class="swatch-circle" style="background: #38bdf8;"></span>
+                  <span class="swatch-circle" style="background: #06b6d4;"></span>
+                </div>
+                <div>
+                  <div class="theme-label-name">Cyber Blue</div>
+                  <div class="theme-label-desc">Standart To‘q Ko‘k & Elektr Kian</div>
+                </div>
+              </div>
+              <span class="theme-check-icon">&check;</span>
+            </div>
+
+            <!-- 2. Gamma Light -->
+            <div class="theme-option-row" data-theme-id="gamma-light">
+              <div class="theme-info">
+                <div class="theme-swatch-circles">
+                  <span class="swatch-circle" style="background: #eef2f7;"></span>
+                  <span class="swatch-circle" style="background: #ffffff;"></span>
+                  <span class="swatch-circle" style="background: #0284c7;"></span>
+                  <span class="swatch-circle" style="background: #0f172a;"></span>
+                </div>
+                <div>
+                  <div class="theme-label-name">Gamma Light</div>
+                  <div class="theme-label-desc">Minimalist Oq & Editorial Dizayn</div>
+                </div>
+              </div>
+              <span class="theme-check-icon">&check;</span>
+            </div>
+
+            <!-- 3. Nordic Charcoal -->
+            <div class="theme-option-row" data-theme-id="nordic-charcoal">
+              <div class="theme-info">
+                <div class="theme-swatch-circles">
+                  <span class="swatch-circle" style="background: #0f1013;"></span>
+                  <span class="swatch-circle" style="background: #17181d;"></span>
+                  <span class="swatch-circle" style="background: #e4e4e7;"></span>
+                  <span class="swatch-circle" style="background: #38bdf8;"></span>
+                </div>
+                <div>
+                  <div class="theme-label-name">Nordic Charcoal</div>
+                  <div class="theme-label-desc">Mat Grafit & Minimal Neomatt</div>
+                </div>
+              </div>
+              <span class="theme-check-icon">&check;</span>
+            </div>
+
+            <!-- 4. Onyx -->
+            <div class="theme-option-row" data-theme-id="onyx">
+              <div class="theme-info">
+                <div class="theme-swatch-circles">
+                  <span class="swatch-circle" style="background: #181A1B;"></span>
+                  <span class="swatch-circle" style="background: #111213;"></span>
+                  <span class="swatch-circle" style="background: #FFFFFF;"></span>
+                  <span class="swatch-circle" style="background: #1D1F22;"></span>
+                </div>
+                <div>
+                  <div class="theme-label-name">Onyx</div>
+                  <div class="theme-label-desc">Monoxrom Oq/Qora & #111213 / #181A1B</div>
+                </div>
+              </div>
+              <span class="theme-check-icon">&check;</span>
+            </div>
+
+            <!-- 5. Alien -->
+            <div class="theme-option-row" data-theme-id="alien">
+              <div class="theme-info">
+                <div class="theme-swatch-circles">
+                  <span class="swatch-circle" style="background: #152025;"></span>
+                  <span class="swatch-circle" style="background: #A9F00F;"></span>
+                  <span class="swatch-circle" style="background: #81B61C;"></span>
+                  <span class="swatch-circle" style="background: #547808;"></span>
+                </div>
+                <div>
+                  <div class="theme-label-name">Alien</div>
+                  <div class="theme-label-desc">Neon #A9F00F & no star 3.png</div>
+                </div>
+              </div>
+              <span class="theme-check-icon">&check;</span>
+            </div>
+
+            <!-- 6. Aurum -->
+            <div class="theme-option-row" data-theme-id="aurum">
+              <div class="theme-info">
+                <div class="theme-swatch-circles">
+                  <span class="swatch-circle" style="background: #1B1C1D;"></span>
+                  <span class="swatch-circle" style="background: #D2AC47;"></span>
+                  <span class="swatch-circle" style="background: #F7EF8A;"></span>
+                  <span class="swatch-circle" style="background: #0D0D09;"></span>
+                </div>
+                <div>
+                  <div class="theme-label-name">Aurum</div>
+                  <div class="theme-label-desc">Oltin Gradient & NY-bg-10-up.png</div>
+                </div>
+              </div>
+              <span class="theme-check-icon">&check;</span>
+            </div>
+
+            <!-- 7. Shadow -->
+            <div class="theme-option-row" data-theme-id="shadow">
+              <div class="theme-info">
+                <div class="theme-swatch-circles">
+                  <span class="swatch-circle" style="background: #181616;"></span>
+                  <span class="swatch-circle" style="background: #DDDDDD;"></span>
+                  <span class="swatch-circle" style="background: #FFFFFF;"></span>
+                  <span class="swatch-circle" style="background: #424242;"></span>
+                </div>
+                <div>
+                  <div class="theme-label-name">Shadow</div>
+                  <div class="theme-label-desc">Mat Grafit & #181616 / #DDDDDD</div>
+                </div>
+              </div>
+              <span class="theme-check-icon">&check;</span>
+            </div>
+
+            <!-- 8. Emerald Oasis -->
+            <div class="theme-option-row" data-theme-id="emerald-oasis">
+              <div class="theme-info">
+                <div class="theme-swatch-circles">
+                  <span class="swatch-circle" style="background: #06120e;"></span>
+                  <span class="swatch-circle" style="background: #0a1c15;"></span>
+                  <span class="swatch-circle" style="background: #10b981;"></span>
+                  <span class="swatch-circle" style="background: #34d399;"></span>
+                </div>
+                <div>
+                  <div class="theme-label-name">Emerald Oasis</div>
+                  <div class="theme-label-desc">Qarag‘ay Yashil & Eko-Muhandislik</div>
+                </div>
+              </div>
+              <span class="theme-check-icon">&check;</span>
+            </div>
+
+            <!-- 9. Sunset Solar -->
+            <div class="theme-option-row" data-theme-id="sunset-solar">
+              <div class="theme-info">
+                <div class="theme-swatch-circles">
+                  <span class="swatch-circle" style="background: #150d12;"></span>
+                  <span class="swatch-circle" style="background: #1e131b;"></span>
+                  <span class="swatch-circle" style="background: #f59e0b;"></span>
+                  <span class="swatch-circle" style="background: #fb923c;"></span>
+                </div>
+                <div>
+                  <div class="theme-label-name">Sunset Solar</div>
+                  <div class="theme-label-desc">Issiq Terrakota & Oltin Shafaq</div>
+                </div>
+              </div>
+              <span class="theme-check-icon">&check;</span>
+            </div>
+
+            <!-- 10. Cosmic Amethyst -->
+            <div class="theme-option-row" data-theme-id="cosmic-amethyst">
+              <div class="theme-info">
+                <div class="theme-swatch-circles">
+                  <span class="swatch-circle" style="background: #0d0a1b;"></span>
+                  <span class="swatch-circle" style="background: #15102a;"></span>
+                  <span class="swatch-circle" style="background: #a855f7;"></span>
+                  <span class="swatch-circle" style="background: #c084fc;"></span>
+                </div>
+                <div>
+                  <div class="theme-label-name">Cosmic Amethyst</div>
+                  <div class="theme-label-desc">Kosmik Binafsha & Neon Galaxy</div>
+                </div>
+              </div>
+              <span class="theme-check-icon">&check;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Slide Stage (16:9 Frame - Total 15 Slides) -->
+    <main class="deck-stage" id="deckStage">
+
+      <!-- ===================================================================
+           SLAYD 1: LOYIHA NOMI & KIRISH
+           =================================================================== -->
+      <section class="slide active" data-slide="1">
+        <div style="display: grid; grid-template-columns: 1.25fr 0.75fr; align-items: center; height: 100%; gap: 36px;">
+          <div>
+            <div class="slide-badge-row">
+              <span class="slide-number-pill">Slayd 01</span>
+              <span class="slide-topic-title">Muhandislik Tizimlari Taqdimoti</span>
+            </div>
+            
+            <h1 class="slide-title" style="font-size: 2.65rem; line-height: 1.18; margin-top: 10px; margin-bottom: 16px;">
+              Yotoqxonadagi suv quvurlarini <span style="background: linear-gradient(90deg, var(--primary-light), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">aqlli monitoring qilish</span> va suv oqishini erta aniqlash tizimi
+            </h1>
+
+            <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 30px;">
+              Muhandislik muammosini tahlil qilish, yechimlarni solishtirish va asoslangan tanlov
+            </p>
+
+            <div style="display: flex; gap: 30px; border-top: 1px solid var(--border-subtle); padding-top: 20px;">
+              <div>
+                <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">Fan</div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-pure);">Muhandislikka Kirish</div>
+              </div>
+              <div>
+                <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">Tizim Turi</div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: var(--primary-light);">IoT & Embedded Sensing</div>
+              </div>
+              <div>
+                <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">Taqdimotchi</div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-pure);">Muhandislar Jamoasi</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Minimalist Animated Tech Graphic -->
+          <div style="display: flex; align-items: center; justify-content: center; position: relative;">
+            <svg width="380" height="380" viewBox="0 0 380 380" fill="none">
+              <circle cx="190" cy="190" r="160" stroke="var(--border-subtle)" stroke-width="1.5" stroke-dasharray="6 6"/>
+              <circle cx="190" cy="190" r="120" stroke="var(--border-glow)" stroke-width="2"/>
+              <circle cx="190" cy="190" r="80" fill="var(--bg-card)" stroke="var(--primary-light)" stroke-width="2"/>
+
+              <!-- Central Water Drop Icon -->
+              <path d="M190 140 C190 140 160 180 160 205 C160 221.5 173.5 235 190 235 C206.5 235 220 221.5 220 205 C220 180 190 140 190 140 Z" 
+                    fill="url(#dropGrad)"/>
+              <defs>
+                <linearGradient id="dropGrad" x1="160" y1="140" x2="220" y2="235" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="var(--primary-light)"/>
+                  <stop offset="1" stop-color="var(--primary)"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Orbital IoT Sensor Nodes -->
+              <circle cx="190" cy="30" r="10" fill="var(--bg-stage)" stroke="var(--primary-light)" stroke-width="2.5"/>
+              <circle cx="190" cy="30" r="4" fill="var(--primary-light)"/>
+              <text x="190" y="16" fill="var(--primary-light)" font-size="10" font-family="monospace" font-weight="700" text-anchor="middle">PRESSURE SENSOR</text>
+
+              <circle cx="350" cy="190" r="10" fill="var(--bg-stage)" stroke="var(--accent-emerald)" stroke-width="2.5"/>
+              <circle cx="350" cy="190" r="4" fill="var(--accent-emerald)"/>
+              <text x="350" y="215" fill="var(--accent-emerald)" font-size="10" font-family="monospace" font-weight="700" text-anchor="middle">ESP32 & WI-FI</text>
+
+              <circle cx="190" cy="350" r="10" fill="var(--bg-stage)" stroke="var(--accent-cyan)" stroke-width="2.5"/>
+              <circle cx="190" cy="350" r="4" fill="var(--accent-cyan)"/>
+              <text x="190" y="374" fill="var(--accent-cyan)" font-size="10" font-family="monospace" font-weight="700" text-anchor="middle">CLOUD / AI ENGINE</text>
+
+              <circle cx="30" cy="190" r="10" fill="var(--bg-stage)" stroke="var(--accent-amber)" stroke-width="2.5"/>
+              <circle cx="30" cy="190" r="4" fill="var(--accent-amber)"/>
+              <text x="30" y="215" fill="var(--accent-amber)" font-size="10" font-family="monospace" font-weight="700" text-anchor="middle">STAFF MOBILE APP</text>
+
+              <line x1="190" y1="40" x2="190" y2="110" stroke="var(--border-glow)" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <line x1="340" y1="190" x2="270" y2="190" stroke="var(--border-glow)" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <line x1="190" y1="340" x2="190" y2="270" stroke="var(--border-glow)" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <line x1="40" y1="190" x2="110" y2="190" stroke="var(--border-glow)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            </svg>
+
+            <!-- Realtime Telemetry Simulation Box -->
+            <div style="position: absolute; bottom: 8px; right: 10px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: var(--radius-sm); padding: 8px 14px; font-family: var(--font-mono); font-size: 0.72rem; box-shadow: var(--shadow-card);">
+              <div style="color: var(--primary-light);">&bull; PIPE_01: <span style="color:var(--accent-emerald);">2.48 BAR</span> (OK)</div>
+              <div style="color: var(--text-muted);">&bull; TELEMETRY: 24/7 ACTIVE</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 2: ASOSIY MUAMMO VA DOLZARBLIK
+           =================================================================== -->
+      <section class="slide" data-slide="2">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 02</span>
+          <span class="slide-topic-title">Muammo Bayoni & Dolzarblik</span>
+        </div>
+        <h2 class="slide-title">Yotoqxona suv ta’minotidagi asosiy muammo</h2>
+        <p class="slide-subtitle">
+          Muhandislik nuqtai nazaridan asosiy e’tibor oqibat sodir bo‘lgandan keyin xabar berishga emas, balki <strong>erta aniqlashga</strong> qaratiladi.
+        </p>
+
+        <div class="slide-content">
+          <div class="grid-2" style="margin-bottom: 18px;">
+            <!-- Core Statement Card -->
+            <div class="card card-highlight">
+              <div class="card-heading" style="color: var(--primary-light);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Muammo Bayoni (Problem Statement)
+              </div>
+              <p style="font-size: 1.05rem; color: var(--text-pure); line-height: 1.6; margin-top: 10px;">
+                "Yotoqxona suv ta’minoti tizimida yuzaga keladigan nosozliklar va suv oqishlarini o‘z vaqtida aniqlash qiyin, natijada muammo <strong>kech aniqlanib</strong>, suv isrofi va binoga zarar yuzaga keladi."
+              </p>
+
+              <div style="margin-top: 18px; padding: 12px 16px; background: var(--bg-card-inner); border-radius: var(--radius-sm); border-left: 3px solid var(--accent-cyan);">
+                <strong style="color: var(--accent-cyan); font-size: 0.85rem; text-transform: uppercase;">Muhandislik vazifasi:</strong>
+                <div style="font-size: 0.9rem; color: var(--text-main); margin-top: 4px;">
+                  Suv sizib chiqishining boshlang‘ich mikrootish fazasidayoq anomaliyani qayd etish.
+                </div>
+              </div>
+            </div>
+
+            <!-- 5 Manifested Hazards -->
+            <div class="card">
+              <div class="card-heading">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Yuzaga keladigan 5 ta asosiy muammo
+              </div>
+              
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; background: var(--bg-card-inner); border-radius: 6px;">
+                  <span style="font-size: 0.9rem; color: var(--text-main);">1. Suv ta’minotining to‘satdan to‘xtab qolishi</span>
+                  <span class="tag tag-rose">Ta’minot uzilishi</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; background: var(--bg-card-inner); border-radius: 6px;">
+                  <span style="font-size: 0.9rem; color: var(--text-main);">2. Yashirin quvurlardan oqishning kech aniqlanishi</span>
+                  <span class="tag tag-rose">Yashirin oqish</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; background: var(--bg-card-inner); border-radius: 6px;">
+                  <span style="font-size: 0.9rem; color: var(--text-main);">3. Quvurlarning deformatsiyasi va shikastlanishi</span>
+                  <span class="tag tag-amber">Struktura nuqsoni</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; background: var(--bg-card-inner); border-radius: 6px;">
+                  <span style="font-size: 0.9rem; color: var(--text-main);">4. Jo‘mrak mexanizmining sinishi va toshish</span>
+                  <span class="tag tag-amber">Mexanik nosozlik</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; background: var(--bg-card-inner); border-radius: 6px;">
+                  <span style="font-size: 0.9rem; color: var(--text-main);">5. Jo‘mraklarning ochiq / yopilmay qolishi</span>
+                  <span class="tag tag-blue">Inson e’tiborsizligi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Consequences Strip -->
+          <div class="grid-3">
+            <div class="card" style="padding: 14px 18px; border-left: 3px solid var(--accent-rose);">
+              <div style="color: var(--accent-rose); font-weight: 800; font-size: 1.05rem;">Suv Isrofi</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 3px;">Tonnalab ichimlik suvi befoyda oqib ketishi va katta hisob-kitoblar.</div>
+            </div>
+            <div class="card" style="padding: 14px 18px; border-left: 3px solid var(--accent-amber);">
+              <div style="color: var(--accent-amber); font-weight: 800; font-size: 1.05rem;">Moddiy Zarar</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 3px;">Qavatlararo toshish, devor va elektr tarmoqlarining zaxlanishi.</div>
+            </div>
+            <div class="card" style="padding: 14px 18px; border-left: 3px solid var(--primary-light);">
+              <div style="color: var(--primary-light); font-weight: 800; font-size: 1.05rem;">Ijtimoiy Noqulaylik</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 3px;">Talabalar va xodimlar maishiy hayotining buzilishi va noroziligi.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 3: MUAMMOGA TA'SIR QILUVCHI SABABLAR
+           =================================================================== -->
+      <section class="slide" data-slide="3">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 03</span>
+          <span class="slide-topic-title">Sabab-Oqibat Zanjiri</span>
+        </div>
+        <h2 class="slide-title">Muammoga ta’sir qiluvchi sabablar</h2>
+        <p class="slide-subtitle">
+          Har bir texnik oqibat muayyan sabablar zanjiriga bog‘langan. Ularni muhandislik nuqtai nazaridan yoritamiz.
+        </p>
+
+        <div class="slide-content">
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <!-- Chain 1 -->
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <div class="card-heading" style="margin-bottom: 0; font-size: 1rem;">
+                  <span class="tag tag-rose">1-Sabab</span> Quvur shikastlanishi
+                </div>
+                <span style="font-size: 0.78rem; color: var(--text-muted);">Yashirin bosim oqishi</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <div style="padding: 8px 14px; background: var(--bg-card-inner); border-radius: 6px; font-size: 0.88rem; color: var(--text-main);">Quvur shikastlanadi</div>
+                <span style="color: var(--accent-cyan); font-weight: bold;">&rarr;</span>
+                <div style="padding: 8px 14px; background: var(--bg-card-inner); border-radius: 6px; font-size: 0.88rem; color: var(--text-main);">Suv sizib oqadi</div>
+                <span style="color: var(--accent-cyan); font-weight: bold;">&rarr;</span>
+                <div style="padding: 8px 14px; background: rgba(255, 23, 68, 0.18); border: 1px solid rgba(255, 23, 68, 0.45); border-radius: 6px; font-size: 0.88rem; color: var(--accent-rose); font-weight: 700;">Oqish kech aniqlanadi</div>
+                <span style="color: var(--accent-cyan); font-weight: bold;">&rarr;</span>
+                <div style="padding: 8px 14px; background: var(--bg-card-inner); border-radius: 6px; font-size: 0.88rem; font-weight: 700; color: var(--text-pure);">Suv isrofi va moddiy zarar</div>
+              </div>
+            </div>
+
+            <!-- Chain 2 -->
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <div class="card-heading" style="margin-bottom: 0; font-size: 1rem;">
+                  <span class="tag tag-amber">2-Sabab</span> Jo‘mrak sinishi
+                </div>
+                <span style="font-size: 0.78rem; color: var(--text-muted);">Mexanik to‘xtatib bo‘lmaslik</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <div style="padding: 8px 14px; background: var(--bg-card-inner); border-radius: 6px; font-size: 0.88rem; color: var(--text-main);">Jo‘mrak buziladi</div>
+                <span style="color: var(--accent-cyan); font-weight: bold;">&rarr;</span>
+                <div style="padding: 8px 14px; background: var(--bg-card-inner); border-radius: 6px; font-size: 0.88rem; color: var(--text-main);">Suvni to‘xtatish qiyinlashadi</div>
+                <span style="color: var(--accent-cyan); font-weight: bold;">&rarr;</span>
+                <div style="padding: 8px 14px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 6px; font-size: 0.88rem; color: var(--accent-amber);">Muammo to‘xtovsiz davom etadi</div>
+                <span style="color: var(--accent-cyan); font-weight: bold;">&rarr;</span>
+                <div style="padding: 8px 14px; background: var(--bg-card-inner); border-radius: 6px; font-size: 0.88rem; font-weight: 700; color: var(--text-pure);">Xonani suv bosish xavfi</div>
+              </div>
+            </div>
+
+            <!-- Chain 3 -->
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <div class="card-heading" style="margin-bottom: 0; font-size: 1rem;">
+                  <span class="tag tag-blue">3-Sabab</span> Jo‘mrakning yopilmay qolishi
+                </div>
+                <span style="font-size: 0.78rem; color: var(--text-muted);">Insoniy omil</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <div style="padding: 8px 14px; background: var(--bg-card-inner); border-radius: 6px; font-size: 0.88rem; color: var(--text-main);">Jo‘mrak ochiq qoladi</div>
+                <span style="color: var(--accent-cyan); font-weight: bold;">&rarr;</span>
+                <div style="padding: 8px 14px; background: var(--bg-card-inner); border-radius: 6px; font-size: 0.88rem; color: var(--text-main);">Suv doimiy behuda oqadi</div>
+                <span style="color: var(--accent-cyan); font-weight: bold;">&rarr;</span>
+                <div style="padding: 8px 14px; background: var(--bg-card-inner); border-radius: 6px; font-size: 0.88rem; color: var(--text-main);">Hech kim e’tibor bermaydi</div>
+                <span style="color: var(--accent-cyan); font-weight: bold;">&rarr;</span>
+                <div style="padding: 8px 14px; background: var(--bg-card-inner); border-radius: 6px; font-size: 0.88rem; font-weight: 700; color: var(--text-pure);">Surunkali suv isrofi</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Highlight Engineering Question -->
+          <div class="card card-highlight" style="margin-top: 16px; padding: 18px 24px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan); flex-shrink: 0; border: 1px solid var(--border-glow);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div>
+                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-cyan); font-weight: 800; letter-spacing: 0.05em;">Asosiy Muhandislik Savoli:</div>
+                <div style="font-size: 1.15rem; font-weight: 700; color: var(--text-pure); line-height: 1.35; margin-top: 2px;">
+                  "Muammo yuzaga kelganda uni qanday qilib imkon qadar tez aniqlash va mas’ul xodimga yetkazish mumkin?"
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 4: MANFAATDOR TOMONLAR (STAKEHOLDERS)
+           =================================================================== -->
+      <section class="slide" data-slide="4">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 04</span>
+          <span class="slide-topic-title">Ehtiyojlar & Manfaatlar</span>
+        </div>
+        <h2 class="slide-title">Manfaatdor tomonlar (Stakeholders)</h2>
+        <p class="slide-subtitle">
+          Tizim barcha 5 ta manfaatdor tomon talab va ehtiyojlariga mos kelishi shart.
+        </p>
+
+        <div class="slide-content">
+          <div class="grid-5">
+            <!-- 1. Talabalar -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; color: var(--primary-light); margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div class="card-heading" style="font-size: 1.05rem;">Talabalar</div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; margin-top: 6px;">
+                  Yotoqxona yashovchilari. Suv ta’minoti uzluksiz, gigiyenik va qulay bo‘lishi zarur.
+                </div>
+              </div>
+              <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-subtle);">
+                <span class="tag tag-blue">Barqaror suv ta’minoti</span>
+              </div>
+            </div>
+
+            <!-- 2. Xodimlar -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; color: var(--accent-emerald); margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                </div>
+                <div class="card-heading" style="font-size: 1.05rem;">Xodimlar</div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; margin-top: 6px;">
+                  Komendant va navbatchilar. Avariya holatida darhol xabardor bo‘lib, chora ko‘rish.
+                </div>
+              </div>
+              <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-subtle);">
+                <span class="tag tag-emerald">Muammoni tez aniqlash</span>
+              </div>
+            </div>
+
+            <!-- 3. Santexniklar -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; color: var(--accent-amber); margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <div class="card-heading" style="font-size: 1.05rem;">Santexniklar</div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; margin-top: 6px;">
+                  Texnik ta’mirlash xizmati. Quvurning qaysi nuqtasi shikastlanganini bexato topish.
+                </div>
+              </div>
+              <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-subtle);">
+                <span class="tag tag-amber">Nosozlik joyini tez aniqlash</span>
+              </div>
+            </div>
+
+            <!-- 4. Universitet -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; color: var(--accent-indigo); margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4"/></svg>
+                </div>
+                <div class="card-heading" style="font-size: 1.05rem;">Universitet</div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; margin-top: 6px;">
+                  Ma’muriyat va moliya bo‘limi. Kommunal isrofni va kutilmagan ta’mir xarajatini kamaytirish.
+                </div>
+              </div>
+              <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-subtle);">
+                <span class="tag tag-blue">Zararlarni kamaytirish</span>
+              </div>
+            </div>
+
+            <!-- 5. IT xodimlari -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan); margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <div class="card-heading" style="font-size: 1.05rem;">IT Xodimlari</div>
+                <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; margin-top: 6px;">
+                  Tizim operatorlari. Datchiklar va Wi-Fi aloqasining barqaror va xavfsiz ishlashini ta’minlash.
+                </div>
+              </div>
+              <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-subtle);">
+                <span class="tag tag-cyan">Tizimni qo‘llab-quvvatlash</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 5: ASOSIY CHEKLOV (BYUDJET)
+           =================================================================== -->
+      <section class="slide" data-slide="5">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 05</span>
+          <span class="slide-topic-title">Muhandislik Cheklovlari</span>
+        </div>
+        <h2 class="slide-title">Asosiy cheklov: Universitet Byudjeti</h2>
+        <p class="slide-subtitle">
+          Tizim universitetning mavjud moliyaviy imkoniyatlari doirasida amalga oshirilishi shart.
+        </p>
+
+        <div class="slide-content">
+          <div class="grid-2" style="align-items: center;">
+            <div>
+              <div class="card card-highlight" style="margin-bottom: 18px;">
+                <div class="card-heading" style="color: var(--primary-light);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                  Moliyaviy Imkoniyatlar Doirasi
+                </div>
+                <p style="font-size: 0.95rem; color: var(--text-main); line-height: 1.6; margin-top: 8px;">
+                  Byudjet — loyihaning asosiy filtri. Qimmatbaho sanoat skada datchiklari yoki yangi kabel magistrallari o‘tkazish iqtisodiy jihatdan imkonsiz.
+                </p>
+              </div>
+
+              <div class="card">
+                <div class="card-heading" style="font-size: 1rem;">Nega kompleks baholash zarur?</div>
+                <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-top: 6px;">
+                  Shuning uchun yechimlar faqat texnik imkoniyat bo‘yicha emas, balki quyidagi 4 ta teng kuchli omil orqali tekshiriladi:
+                </p>
+                <div style="display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;">
+                  <span class="tag tag-emerald">Narx</span>
+                  <span class="tag tag-blue">Xavfsizlik</span>
+                  <span class="tag tag-amber">Qulaylik</span>
+                  <span class="tag tag-cyan">Samaradorlik</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mechanical Scale Illustration -->
+            <div style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; align-items: center;">
+              <svg width="340" height="220" viewBox="0 0 340 220" fill="none">
+                <polygon points="170,140 140,200 200,200" fill="var(--bg-stage)" stroke="var(--border-glow)" stroke-width="2"/>
+                <circle cx="170" cy="140" r="7" fill="var(--accent-cyan)"/>
+                
+                <line x1="40" y1="110" x2="300" y2="170" stroke="var(--primary-light)" stroke-width="5" stroke-linecap="round"/>
+                
+                <line x1="60" y1="114" x2="60" y2="140" stroke="var(--border-glow)" stroke-width="1.5"/>
+                <rect x="25" y="140" width="70" height="42" rx="6" fill="var(--bg-card)" stroke="var(--primary-light)" stroke-width="1.5"/>
+                <text x="60" y="158" fill="var(--text-pure)" font-size="10" font-weight="700" text-anchor="middle">Xavfsizlik</text>
+                <text x="60" y="172" fill="var(--primary-light)" font-size="8.5" text-anchor="middle">& Samara</text>
+                
+                <line x1="280" y1="166" x2="280" y2="190" stroke="var(--border-glow)" stroke-width="1.5"/>
+                <rect x="245" y="190" width="70" height="42" rx="6" fill="var(--bg-card)" stroke="var(--accent-amber)" stroke-width="1.5"/>
+                <text x="280" y="208" fill="var(--text-pure)" font-size="10" font-weight="700" text-anchor="middle">Byudjet</text>
+                <text x="280" y="222" fill="var(--accent-amber)" font-size="8.5" text-anchor="middle">Cheklovi</text>
+              </svg>
+              <div style="font-size: 0.82rem; color: var(--text-muted); text-align: center; margin-top: 10px;">
+                Muhandislik balansi: Harajat va Natijaning o‘zaro nisbati
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 6: TAKLIF QILINGAN 3 TA YECHIM
+           =================================================================== -->
+      <section class="slide" data-slide="6">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 06</span>
+          <span class="slide-topic-title">Konseptual Yondashuvlar</span>
+        </div>
+        <h2 class="slide-title">Taklif qilingan 3 ta muqobil yechim</h2>
+        <p class="slide-subtitle">
+          Muammo yechimi uchun 3 xil texnik va tashkiliy arxitektura ishlab chiqildi va solishtirildi.
+        </p>
+
+        <div class="slide-content">
+          <div class="grid-3">
+            <!-- 1-Yechim -->
+            <div class="card card-highlight" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="tag tag-blue">1-Yechim</span>
+                  <span style="font-size: 0.72rem; color: var(--accent-cyan); font-weight: 700;">IoT & Raqamli</span>
+                </div>
+                <div class="card-heading">Aqlli Monitoring Tizimi</div>
+                <p style="font-size: 0.88rem; color: var(--text-main); line-height: 1.5; margin-top: 8px;">
+                  Quvurlarga elektron bosim sensorlari o‘rnatiladi. ESP32 mikrokontrolleri mavjud Wi-Fi orqali ma’lumotlarni bulutga yuboradi. AI anomaliyani aniqlab, xodim mobil ilovasiga bildirishnoma yuboradi.
+                </p>
+              </div>
+              <div style="margin-top: 16px; padding: 10px; background: var(--bg-card-inner); border-radius: 8px; font-size: 0.82rem; color: var(--primary-light);">
+                &check; 24/7 avtomatik nazorat, soniyalarda xabar
+              </div>
+            </div>
+
+            <!-- 2-Yechim -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="tag tag-amber">2-Yechim</span>
+                  <span style="font-size: 0.72rem; color: var(--accent-amber); font-weight: 700;">Gibrid / Tugma</span>
+                </div>
+                <div class="card-heading">Qavatlardagi Chaqiruv Tugmalari</div>
+                <p style="font-size: 0.88rem; color: var(--text-main); line-height: 1.5; margin-top: 8px;">
+                  Har bir qavatga suv muammosi haqida xabar beruvchi devoriy chaqiruv tugmasi o‘rnatiladi. Talaba yoki xodim muammoni ko‘rgach, tugmani bosadi va mas’ulga signal yuboriladi.
+                </p>
+              </div>
+              <div style="margin-top: 16px; padding: 10px; background: var(--bg-card-inner); border-radius: 8px; font-size: 0.82rem; color: var(--text-muted);">
+                &bull; Boshlang‘ich narx arzon, ammo inson harakatiga tayanadi
+              </div>
+            </div>
+
+            <!-- 3-Yechim -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="tag tag-rose">3-Yechim</span>
+                  <span style="font-size: 0.72rem; color: var(--accent-rose); font-weight: 700;">Inson Resursi</span>
+                </div>
+                <div class="card-heading">Har Bir Qavatga Santexnik</div>
+                <p style="font-size: 0.88rem; color: var(--text-main); line-height: 1.5; margin-top: 8px;">
+                  Har bir qavat uchun alohida navbatchi santexnik mas’ul etib biriktiriladi. U doimiy aylanib quvurlarni vizual tekshiradi va nosozliklarni joyida aniqlab bartaraf etadi.
+                </p>
+              </div>
+              <div style="margin-top: 16px; padding: 10px; background: var(--bg-card-inner); border-radius: 8px; font-size: 0.82rem; color: var(--text-muted);">
+                &bull; Insoniy nazorat, biroq ulkan doimiy oylik xarajat
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 7: 1-YECHIM TIZIM ARXITEKTURASI
+           =================================================================== -->
+      <section class="slide" data-slide="7">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 07</span>
+          <span class="slide-topic-title">1-Yechim Arxitekturasi</span>
+        </div>
+        <h2 class="slide-title">Aqlli IoT monitoring tizimi arxitekturasi</h2>
+        <p class="slide-subtitle">
+          Quvurdagi fizik bosimdan tortib xodim mobil telefonidagi push-alertgacha to‘liq ma’lumotlar zanjiri.
+        </p>
+
+        <div class="slide-content">
+          <!-- Flow Pipeline (Design Pattern: 6 Connected Nodes) -->
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 10px 0 20px;">
+            <!-- Step 1: Water Pipe -->
+            <div class="card" style="flex: 1; text-align: center; padding: 16px 12px;">
+              <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: var(--primary-light); border: 1px solid var(--border-subtle);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14h16M4 10h16M10 4v16M14 4v16"/></svg>
+              </div>
+              <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-pure);">Water Pipe</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Suv Quvuri</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.2rem;">&rarr;</div>
+
+            <!-- Step 2: Pressure Sensor -->
+            <div class="card card-highlight" style="flex: 1; text-align: center; padding: 16px 12px;">
+              <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: var(--primary-light); border: 1px solid var(--border-glow);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+              </div>
+              <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-pure);">Pressure Sensor</div>
+              <div style="font-size: 0.72rem; color: var(--accent-cyan); font-weight: bold; margin-top: 2px;">Pipe ID bog‘langan</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.2rem;">&rarr;</div>
+
+            <!-- Step 3: ESP32 -->
+            <div class="card card-highlight" style="flex: 1; text-align: center; padding: 16px 12px;">
+              <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: var(--accent-emerald); border: 1px solid var(--border-subtle);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+              </div>
+              <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-pure);">ESP32 MCU</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Analog &rarr; Raqamli</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.2rem;">&rarr;</div>
+
+            <!-- Step 4: Wi-Fi -->
+            <div class="card" style="flex: 1; text-align: center; padding: 16px 12px;">
+              <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: var(--accent-cyan); border: 1px solid var(--border-subtle);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+              </div>
+              <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-pure);">Dorm Wi-Fi</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Mavjud Tarmoq</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.2rem;">&rarr;</div>
+
+            <!-- Step 5: Cloud AI -->
+            <div class="card card-highlight" style="flex: 1; text-align: center; padding: 16px 12px;">
+              <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: var(--accent-purple); border: 1px solid var(--border-subtle);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+              </div>
+              <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-pure);">Cloud / AI</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Anomaliya Tahlili</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.2rem;">&rarr;</div>
+
+            <!-- Step 6: Mobile App -->
+            <div class="card" style="flex: 1; text-align: center; padding: 16px 12px; border-color: var(--border-glow);">
+              <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: var(--accent-amber); border: 1px solid var(--border-subtle);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </div>
+              <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-pure);">Mobile App</div>
+              <div style="font-size: 0.72rem; color: var(--accent-amber); font-weight: bold; margin-top: 2px;">Push Alert Xabar</div>
+            </div>
+          </div>
+
+          <!-- Kutilayotgan Imkoniyatlar -->
+          <div class="grid-4" style="margin-top: 10px;">
+            <div class="card" style="padding: 14px 16px;">
+              <div style="color: var(--primary-light); font-weight: 700; font-size: 0.92rem; margin-bottom: 4px;">1. Doimiy Monitoring</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Quvur ichidagi gidravlik bosimni 24/7 uzluksiz raqamli o‘lchash.</div>
+            </div>
+            <div class="card" style="padding: 14px 16px;">
+              <div style="color: var(--accent-emerald); font-weight: 700; font-size: 0.92rem; margin-bottom: 4px;">2. Erta Anomaliya</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Bosimning me’yordan noodatiy pasayishini daqiqalarda aniqlash.</div>
+            </div>
+            <div class="card" style="padding: 14px 16px;">
+              <div style="color: var(--accent-amber); font-weight: 700; font-size: 0.92rem; margin-bottom: 4px;">3. Pipe ID Lokalizatsiyasi</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Nosozlik aynan qaysi qavat va qaysi tarmoqqa tegishli ekanini ko‘rsatish.</div>
+            </div>
+            <div class="card" style="padding: 14px 16px;">
+              <div style="color: var(--accent-rose); font-weight: 700; font-size: 0.92rem; margin-bottom: 4px;">4. Avtomatik Xabar</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">Inson e’tiboriga bog‘lanmasdan mas’ul xodimga push-bildirishnoma.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 8: 2-YECHIM — QAVATLARdagi CHAQIRUV TUGMALARI
+           =================================================================== -->
+      <section class="slide" data-slide="8">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 08</span>
+          <span class="slide-topic-title">2-Yechim Arxitekturasi & Tahlil</span>
+        </div>
+        <h2 class="slide-title">2-yechim: Qavatlardagi chaqiruv tugmalari</h2>
+        <p class="slide-subtitle">
+          Qavatlarda qo‘lda xabar berish mexanizmi, texnik ishlash zanjiri va tahlili.
+        </p>
+
+        <div class="slide-content">
+          <!-- Kengaytirilgan Sxema (Matching Slide 7 Architecture Pipeline) -->
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 4px 0 16px;">
+            <!-- Node 1 -->
+            <div class="card card-highlight" style="flex: 1; text-align: center; padding: 12px 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--accent-amber); border: 1px solid var(--border-glow);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">Chaqiruv Tugmasi</div>
+              <div style="font-size: 0.68rem; color: var(--accent-cyan); font-weight: bold; margin-top: 2px;">Floor ID bilan</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem;">&rarr;</div>
+
+            <!-- Node 2 -->
+            <div class="card card-highlight" style="flex: 1; text-align: center; padding: 12px 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--accent-emerald); border: 1px solid var(--border-subtle);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">ESP32</div>
+              <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">Bosilishni o‘qiydi</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem;">&rarr;</div>
+
+            <!-- Node 3 -->
+            <div class="card" style="flex: 1; text-align: center; padding: 12px 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--accent-cyan); border: 1px solid var(--border-subtle);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">Yotoqxona Wi-Fi</div>
+              <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">Mavjud Tarmoq</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem;">&rarr;</div>
+
+            <!-- Node 4 -->
+            <div class="card card-highlight" style="flex: 1; text-align: center; padding: 12px 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--accent-purple); border: 1px solid var(--border-subtle);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">Server / Cloud</div>
+              <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">Vaqt & Qavatni yozadi</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem;">&rarr;</div>
+
+            <!-- Node 5 -->
+            <div class="card" style="flex: 1; text-align: center; padding: 12px 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--primary-light); border: 1px solid var(--border-subtle);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">Bildirishnoma</div>
+              <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">Telegram / Push / SMS</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem;">&rarr;</div>
+
+            <!-- Node 6 -->
+            <div class="card" style="flex: 1; text-align: center; padding: 12px 10px; border-color: var(--border-glow);">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--accent-emerald); border: 1px solid var(--border-subtle);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">Xodim Tasdig‘i</div>
+              <div style="font-size: 0.68rem; color: var(--accent-emerald); font-weight: bold; margin-top: 2px;">"Qabul qildim"</div>
+            </div>
+          </div>
+
+          <!-- 2 Ta Analitik Blok: Qanday Ishlaydi & Texnik Kamchiliklar -->
+          <div class="grid-2">
+            <!-- Qanday Ishlaydi (3-4 Ta Qisqa Texnik Band) -->
+            <div class="card">
+              <div class="card-heading" style="color: var(--primary-light); font-size: 1rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Qanday ishlaydi?
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem; line-height: 1.45;">
+                <div>
+                  <strong style="color: var(--accent-cyan);">&bull; Tugma &rarr; signal:</strong> Oddiy push-button ESP32 ning raqamli kirishiga ulanadi. Bosilganda kirish holati o‘zgaradi, ESP32 buni signal sifatida qabul qiladi. Tugmaning "titrashi" (debounce) dasturiy filtrlanadi, bitta bosish ikki marta hisoblanmasligi uchun.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-cyan);">&bull; Qavat aniqlash:</strong> Har bir ESP32 ga o‘z Floor ID si dasturlangan (masalan, "3-qavat"). Server xabar kelganda qaysi qavatdan ekanini shu ID orqali biladi.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-cyan);">&bull; Uzatish:</strong> ESP32 mavjud Wi-Fi orqali serverga kichik xabar yuboradi (Floor ID + vaqt). Ya’ni 1-yechimdagi bilan bir xil ESP32 va tarmoq, faqat sensor o‘rniga tugma. Ma’lumot hajmi juda kichik.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-cyan);">&bull; Bildirishnoma va LED:</strong> Server xabarni qabul qilib, mas’ul xodimga yuboradi. Xodim "qabul qildim" desa, xabar yopiladi; qabul qilinmasa, takroran eslatiladi. Tugma yonidagi LED "xabar yuborildi" deb yonadi, shunda talaba qayta-qayta bosmaydi va signal ketganini biladi.
+                </div>
+              </div>
+            </div>
+
+            <!-- Texnik Kamchiliklar & Afzallik -->
+            <div class="card">
+              <div class="card-heading" style="color: var(--accent-amber); font-size: 1rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Afzalligi va Texnik kamchiliklari
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem; line-height: 1.45;">
+                <div style="color: var(--accent-emerald);">
+                  <strong>&check; Afzalligi:</strong> Nisbatan sodda, avtomatik datchiklar talab qilinmaydi, boshlang‘ich xarajat kam.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-rose);">&minus; Inson omili:</strong> Muammo avtomatik aniqlanmaydi. Kimdir muammoni ko‘rishi va tugmani bosishi kerak.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-rose);">&minus; Wi-Fi uzilishi xavfi:</strong> Wi-Fi uzilsa, signal ketmaydi (tugma o‘zi ishlayotganini ham bilmaydi).
+                </div>
+                <div>
+                  <strong style="color: var(--accent-rose);">&minus; Heartbeat murakkabligi:</strong> Qurilma tarmoqdan uzilganini sezish uchun qo‘shimcha "heartbeat" kerak bo‘ladi, bu esa tizimni murakkablashtiradi.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-rose);">&minus; Lokalizatsiya cheklovi:</strong> Tugma faqat qavatni (Floor ID) beradi, aynan qaysi quvur yoki jo‘mrak ekanini emas.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 9: 3-YECHIM — HAR BIR QAVAT UCHUN SANTEXNIK MAS'UL
+           =================================================================== -->
+      <section class="slide" data-slide="9">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 09</span>
+          <span class="slide-topic-title">3-Yechim Jarayoni & Tahlil</span>
+        </div>
+        <h2 class="slide-title">3-yechim: Har bir qavat uchun santexnik mas’ul</h2>
+        <p class="slide-subtitle">
+          Bu yechimda elektronika yo‘q, ishlash jarayon va asboblarga tayanadi.
+        </p>
+
+        <div class="slide-content">
+          <!-- Kengaytirilgan Sxema (Matching Slide 7 Architecture Pipeline) -->
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 4px 0 16px;">
+            <!-- Node 1 -->
+            <div class="card" style="flex: 1; text-align: center; padding: 12px 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--primary-light); border: 1px solid var(--border-subtle);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">Davriy Ko‘rik</div>
+              <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">Obxod jadvali</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem;">&rarr;</div>
+
+            <!-- Node 2 -->
+            <div class="card card-highlight" style="flex: 1; text-align: center; padding: 12px 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--accent-amber); border: 1px solid var(--border-glow);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">Tekshiruv</div>
+              <div style="font-size: 0.68rem; color: var(--accent-amber); font-weight: bold; margin-top: 2px;">Quvur, Jo‘mrak, Schetchik</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem;">&rarr;</div>
+
+            <!-- Node 3 -->
+            <div class="card card-highlight" style="flex: 1; text-align: center; padding: 12px 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--accent-rose); border: 1px solid var(--border-subtle);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">Ventilni Yopish</div>
+              <div style="font-size: 0.68rem; color: var(--accent-rose); font-weight: bold; margin-top: 2px;">Qismni ajratish</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem;">&rarr;</div>
+
+            <!-- Node 4 -->
+            <div class="card" style="flex: 1; text-align: center; padding: 12px 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--accent-emerald); border: 1px solid var(--border-subtle);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">Ta’mirlash</div>
+              <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">Joyida bartaraf qilish</div>
+            </div>
+
+            <div style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem;">&rarr;</div>
+
+            <!-- Node 5 -->
+            <div class="card card-highlight" style="flex: 1; text-align: center; padding: 12px 10px; border-color: var(--border-glow);">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card-inner); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; color: var(--primary-light); border: 1px solid var(--border-subtle);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-pure);">Jurnalga Yozish</div>
+              <div style="font-size: 0.68rem; color: var(--accent-cyan); font-weight: bold; margin-top: 2px;">Sana & Takrorlanish</div>
+            </div>
+          </div>
+
+          <!-- 2 Ta Analitik Blok: Qanday Ishlaydi & Texnik Kamchiliklar -->
+          <div class="grid-2">
+            <!-- Qanday Ishlaydi (3-4 Ta Qisqa Texnik Band) -->
+            <div class="card">
+              <div class="card-heading" style="color: var(--primary-light); font-size: 1rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Qanday ishlaydi?
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem; line-height: 1.45;">
+                <div>
+                  <strong style="color: var(--accent-cyan);">&bull; Obxod jadvali:</strong> Santexnik belgilangan vaqtlarda qavatni aylanib chiqadi. Tekshiriladigan narsalar: ko‘rinadigan quvurlar va ulanish joylari (namlik, tomchi), jo‘mraklarning yopilishi, devor va poldagi nam dog‘lar.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-cyan);">&bull; Suv hisoblagichi (schetchik) orqali tekshiruv:</strong> Hamma suv ishlatilmaydigan paytda hisoblagich ko‘rsatkichi o‘zgarsa, tizimda oqish bor degani. Bu qo‘lda bajariladigan, lekin ishonchli usul.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-cyan);">&bull; Nosozlikni ajratish:</strong> Muammo topilganda santexnik shu qavat (yoki bo‘lim) ventilini yopadi, shunda oqish to‘xtaydi, qolgan qavatlar suvsiz qolmaydi. (Bu faqat yotoqxona quvur tizimida qavat bo‘yicha ajratuvchi ventil bo‘lsa mumkin.)
+                </div>
+                <div>
+                  <strong style="color: var(--accent-cyan);">&bull; Aloqa va Jurnal:</strong> Talabalar santexnikka telefon yoki umumiy chat orqali xabar beradi. Tizim shu xabarga bog‘liq. Har bir tekshiruv va ta’mir sana bilan yoziladi. Takroriy nosozliklar shu orqali ko‘rinadi.
+                </div>
+              </div>
+            </div>
+
+            <!-- Texnik Kamchiliklar & Afzallik -->
+            <div class="card">
+              <div class="card-heading" style="color: var(--accent-amber); font-size: 1rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Afzalligi va Texnik kamchiliklari
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem; line-height: 1.45;">
+                <div style="color: var(--accent-emerald);">
+                  <strong>&check; Afzalligi:</strong> Texnik muammo yuzaga kelganda inson tomonidan to‘g‘ridan-to‘g‘ri nazorat mavjud.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-rose);">&minus; Aniqlash kechikishi:</strong> Aniqlash kechikishi = ko‘riklar oralig‘i. Oqish ko‘rikdan keyin boshlansa, keyingi ko‘rikkacha topilmaydi.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-rose);">&minus; Schetchik cheklovi:</strong> Hisoblagich tekshiruvi oqish borligini ko‘rsatadi, lekin qayerdaligini emas.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-rose);">&minus; Nazorat uzluksiz emas:</strong> Tun, dam olish kunlari, santexnik yo‘qligida nazorat butunlay to‘xtaydi.
+                </div>
+                <div>
+                  <strong style="color: var(--accent-rose);">&minus; Inson resursiga bog‘liqlik:</strong> Tizim doimiy inson nazoratiga bog‘liq bo‘lib, universitet byudjetiga muntazam oylik xarajat yuklaydi.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 10: BAHOLASH MEZONLARI
+           =================================================================== -->
+      <section class="slide" data-slide="10">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 10</span>
+          <span class="slide-topic-title">Muhandislik Standartlari</span>
+        </div>
+        <h2 class="slide-title">Baholash mezonlari va 0–5 ballik shkala</h2>
+        <p class="slide-subtitle">
+          Har bir yechim xolis muhandislik qarori uchun 4 ta asosiy mezon bo‘yicha tekshiriladi.
+        </p>
+
+        <div class="slide-content">
+          <div class="grid-4" style="margin-bottom: 22px;">
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <div style="color: var(--accent-emerald); font-size: 1.18rem; font-weight: 800; margin-bottom: 4px;">Narx</div>
+              <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;">Moliyaviy xarajat</div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">Yechimni yaratish, o‘rnatish va uzoq muddat ishlatish xarajatlari hajmi.</p>
+            </div>
+
+            <div class="card" style="border-top: 3px solid var(--primary-light);">
+              <div style="color: var(--primary-light); font-size: 1.18rem; font-weight: 800; margin-bottom: 4px;">Xavfsizlik</div>
+              <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;">Risk nazorati</div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">Suv oqishi, toshishi va kutilmagan nosozliklarni nazorat qilish darajasi.</p>
+            </div>
+
+            <div class="card" style="border-top: 3px solid var(--accent-cyan);">
+              <div style="color: var(--accent-cyan); font-size: 1.18rem; font-weight: 800; margin-bottom: 4px;">Qulaylik</div>
+              <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;">Foydalanish & UX</div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">Foydalanish soddaligi, boshqarish va xodimlar uchun qulaylik darajasi.</p>
+            </div>
+
+            <div class="card" style="border-top: 3px solid var(--accent-purple);">
+              <div style="color: var(--accent-purple); font-size: 1.18rem; font-weight: 800; margin-bottom: 4px;">Samaradorlik</div>
+              <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;">Texnik natija</div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">Muammoni erta aniqlash va suv isrofini amalda bartaraf etish samaradorligi.</p>
+            </div>
+          </div>
+
+          <!-- Standart 0 - 5 Shkala Kartochkasi -->
+          <div class="card" style="padding: 16px 22px;">
+            <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 12px;">
+              Baholash Shkalasi Me’yorlari (0 &ndash; 5 ball)
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="tag tag-rose" style="font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 10px;">0</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Juda yomon</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="tag tag-rose" style="font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 10px;">1</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Yomon</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="tag tag-amber" style="font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 10px;">2</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Qoniqarsiz</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="tag tag-blue" style="font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 10px;">3</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">O‘rtacha</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="tag tag-cyan" style="font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 10px;">4</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Yaxshi</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="tag tag-emerald" style="font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 10px;">5</span>
+                <span style="font-size: 0.85rem; color: var(--accent-emerald); font-weight: 700;">A’lo daraja</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 11: DECISION MATRIX
+           =================================================================== -->
+      <section class="slide" data-slide="11">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 11</span>
+          <span class="slide-topic-title">Qaror Qabul Qilish Matritsasi</span>
+        </div>
+        <h2 class="slide-title">Yechimlarni baholash (Decision Matrix)</h2>
+        <p class="slide-subtitle">
+          Dastlabki va nazariy tahlil natijalariga asoslangan qiyosiy baholash matritsasi.
+        </p>
+
+        <div class="slide-content">
+          <table style="width: 100%; border-collapse: separate; border-spacing: 0 6px;">
+            <thead>
+              <tr>
+                <th style="padding: 10px 16px; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim);">Mezon</th>
+                <th style="padding: 10px 16px; text-align: center; font-size: 0.82rem; text-transform: uppercase; color: var(--primary-light);">1-Yechim: Aqlli Monitoring</th>
+                <th style="padding: 10px 16px; text-align: center; font-size: 0.82rem; text-transform: uppercase; color: var(--accent-amber);">2-Yechim: Chaqiruv Tugmasi</th>
+                <th style="padding: 10px 16px; text-align: center; font-size: 0.82rem; text-transform: uppercase; color: var(--accent-rose);">3-Yechim: Mas’ul Santexnik</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="background: var(--bg-card); padding: 12px 16px; border-radius: 8px 0 0 8px; font-weight: 700; color: var(--text-pure);">Narx</td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center;"><span class="tag tag-amber" style="font-size: 0.9rem; padding: 4px 14px;">2</span></td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center;"><span class="tag tag-emerald" style="font-size: 0.9rem; padding: 4px 14px;">4</span></td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center; border-radius: 0 8px 8px 0;"><span class="tag tag-amber" style="font-size: 0.9rem; padding: 4px 14px;">2</span></td>
+              </tr>
+              <tr>
+                <td style="background: var(--bg-card); padding: 12px 16px; border-radius: 8px 0 0 8px; font-weight: 700; color: var(--text-pure);">Xavfsizlik</td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center;"><span class="tag tag-emerald" style="font-size: 0.9rem; padding: 4px 14px;">5</span></td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center;"><span class="tag tag-blue" style="font-size: 0.9rem; padding: 4px 14px;">3</span></td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center; border-radius: 0 8px 8px 0;"><span class="tag tag-blue" style="font-size: 0.9rem; padding: 4px 14px;">3</span></td>
+              </tr>
+              <tr>
+                <td style="background: var(--bg-card); padding: 12px 16px; border-radius: 8px 0 0 8px; font-weight: 700; color: var(--text-pure);">Qulaylik</td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center;"><span class="tag tag-cyan" style="font-size: 0.9rem; padding: 4px 14px;">4</span></td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center;"><span class="tag tag-blue" style="font-size: 0.9rem; padding: 4px 14px;">3</span></td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center; border-radius: 0 8px 8px 0;"><span class="tag tag-amber" style="font-size: 0.9rem; padding: 4px 14px;">2</span></td>
+              </tr>
+              <tr>
+                <td style="background: var(--bg-card); padding: 12px 16px; border-radius: 8px 0 0 8px; font-weight: 700; color: var(--text-pure);">Samaradorlik</td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center;"><span class="tag tag-emerald" style="font-size: 0.9rem; padding: 4px 14px;">5</span></td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center;"><span class="tag tag-blue" style="font-size: 0.9rem; padding: 4px 14px;">3</span></td>
+                <td style="background: var(--bg-card); padding: 12px 16px; text-align: center; border-radius: 0 8px 8px 0;"><span class="tag tag-amber" style="font-size: 0.9rem; padding: 4px 14px;">2</span></td>
+              </tr>
+              <!-- Winner Row -->
+              <tr style="border-top: 2px solid var(--accent-cyan);">
+                <td style="background: var(--bg-card-inner); padding: 14px 16px; border-radius: 8px 0 0 8px; font-size: 1.1rem; font-weight: 800; color: var(--accent-cyan);">JAMI BALL</td>
+                <td style="background: var(--bg-card-inner); padding: 14px 16px; text-align: center; border-left: 2px solid var(--primary-light);">
+                  <strong style="font-size: 1.35rem; color: var(--primary-light);">16 BALL</strong>
+                  <span class="tag tag-emerald" style="margin-left: 8px;">G‘olib</span>
+                </td>
+                <td style="background: var(--bg-card); padding: 14px 16px; text-align: center;">
+                  <strong style="font-size: 1.2rem; color: var(--accent-amber);">13 BALL</strong>
+                </td>
+                <td style="background: var(--bg-card); padding: 14px 16px; text-align: center; border-radius: 0 8px 8px 0;">
+                  <strong style="font-size: 1.2rem; color: var(--accent-rose);">9 BALL</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="font-size: 0.78rem; color: var(--text-dim); margin-top: 10px; font-style: italic;">
+            * Eslatma: Ballar dastlabki nazariy baholardir. Haqiqiy xarajatlar va sinov natijalari asosida qayta ko‘rib chiqilishi mumkin.
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 12: TRADE-OFF (MUROSALAR)
+           =================================================================== -->
+      <section class="slide" data-slide="12">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 12</span>
+          <span class="slide-topic-title">Muhandislik Trade-off</span>
+        </div>
+        <h2 class="slide-title">Trade-off: Kuchli va zaif tomonlar</h2>
+        <p class="slide-subtitle">
+          "Barcha mezonlarni bir vaqtning o‘zida maksimal qilishning imkoni yo‘q. Tanlov ustuvor mezonlar asosida qilinadi."
+        </p>
+
+        <div class="slide-content">
+          <div class="grid-3" style="margin-bottom: 18px;">
+            <!-- 1-Yechim -->
+            <div class="card card-highlight">
+              <div class="card-heading" style="color: var(--primary-light);">1-Yechim Trade-off</div>
+              <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-size: 0.85rem; color: var(--accent-emerald);">
+                  &check; <strong>Afzalligi:</strong> Avtomatik monitoring, erta aniqlash va xodimga avtomatik xabar berish imkoniyati.
+                </div>
+                <div style="font-size: 0.85rem; color: var(--accent-rose);">
+                  &minus; <strong>Kamchiligi:</strong> Texnik jihatdan murakkabroq va dastlabki apparat xarajatini talab qiladi.
+                </div>
+              </div>
+            </div>
+
+            <!-- 2-Yechim -->
+            <div class="card">
+              <div class="card-heading" style="color: var(--accent-amber);">2-Yechim Trade-off</div>
+              <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-size: 0.85rem; color: var(--accent-emerald);">
+                  &check; <strong>Afzalligi:</strong> Texnik jihatdan sodda va boshlang‘ich narxi nisbatan arzon.
+                </div>
+                <div style="font-size: 0.85rem; color: var(--accent-rose);">
+                  &minus; <strong>Kamchiligi:</strong> Muammo avtomatik aniqlanmaydi; inson muammoni ko‘rib tugmani bosishi kerak.
+                </div>
+              </div>
+            </div>
+
+            <!-- 3-Yechim -->
+            <div class="card">
+              <div class="card-heading" style="color: var(--accent-rose);">3-Yechim Trade-off</div>
+              <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-size: 0.85rem; color: var(--accent-emerald);">
+                  &check; <strong>Afzalligi:</strong> Inson tomonidan bevosita, joyida texnik nazorat mavjud.
+                </div>
+                <div style="font-size: 0.85rem; color: var(--accent-rose);">
+                  &minus; <strong>Kamchiligi:</strong> Doimiy inson resursi va oylik shtat nazoratiga to‘liq bog‘liq.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Muhandislik tamoyili -->
+          <div class="card" style="padding: 14px 20px; background: var(--bg-card-inner); border-left: 4px solid var(--accent-cyan);">
+            <div style="font-size: 0.92rem; color: var(--text-main); line-height: 1.5;">
+              <strong style="color: var(--accent-cyan);">Muhandislik nuqtai nazari:</strong> Kompromissiz loyiha bo‘lmaydi. Eng to‘g‘ri yechim — ustuvor mezonlarni ta’minlab, mavjud kamchiliklarni aqlli choralar bilan kamaytirishdir.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 13: ASOSLANGAN TANLOV
+           =================================================================== -->
+      <section class="slide" data-slide="13">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 13</span>
+          <span class="slide-topic-title">Mantiqiy Xulosa</span>
+        </div>
+        <h2 class="slide-title">Asoslangan tanlov: 1-yechim (Aqlli monitoring)</h2>
+        <p class="slide-subtitle">
+          Muhandislik tanlov formulasi va mavjud kamchilikni bartaraf etish chorasi.
+        </p>
+
+        <div class="slide-content">
+          <!-- Formula Box -->
+          <div class="card card-highlight" style="padding: 20px 24px; margin-bottom: 18px;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-cyan); font-weight: 800; letter-spacing: 0.05em; margin-bottom: 6px;">
+              Asoslash Formulalari:
+            </div>
+            <div style="font-size: 1.2rem; font-weight: 700; color: var(--text-pure); line-height: 1.5;">
+              "Biz <span style="color: var(--primary-light);">1-yechimni (Aqlli monitoring)</span> tanladik, chunki <span style="color: var(--accent-emerald);">Xavfsizlik</span> va <span style="color: var(--accent-emerald);">Samaradorlik</span> mezonlari biz uchun ustuvor. <span style="color: var(--accent-rose);">Narx</span> mezonidagi kamchilikni esa <span style="color: var(--accent-amber);">arzon ESP32, standart datchiklar va mavjud Wi-Fi</span> chorasi orqali kamaytiramiz."
+            </div>
+          </div>
+
+          <!-- 4 Ta Asoslash Savollari -->
+          <div class="grid-2">
+            <div class="card" style="padding: 14px 18px;">
+              <div style="font-weight: 700; color: var(--primary-light); font-size: 0.95rem; margin-bottom: 2px;">1. Nima uchun aynan shu yechim tanlandi?</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">Suv toshib ketmasdan avval, bosim pasayishi orqali erta aniqlovchi yagona avtomat tizim.</div>
+            </div>
+            <div class="card" style="padding: 14px 18px;">
+              <div style="font-weight: 700; color: var(--accent-emerald); font-size: 0.95rem; margin-bottom: 2px;">2. Qaysi mezonlar ustuvor bo‘ldi?</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;"><strong>Xavfsizlik (5 ball)</strong> va <strong>Samaradorlik (5 ball)</strong> — bino infratuzilmasi muhofazasi.</div>
+            </div>
+            <div class="card" style="padding: 14px 18px;">
+              <div style="font-weight: 700; color: var(--accent-rose); font-size: 0.95rem; margin-bottom: 2px;">3. Qaysi kamchilik mavjud?</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">Dastlabki sensorlar va mikrokontrollerlar xaridi (boshlang‘ich moliyaviy xarajat).</div>
+            </div>
+            <div class="card" style="padding: 14px 18px;">
+              <div style="font-weight: 700; color: var(--accent-amber); font-size: 0.95rem; margin-bottom: 2px;">4. Kamchilikni qanday kamaytirish mumkin?</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">Qimmat sanoat skadalari o‘rniga ochiq kodli ESP32 va mavjud yotoqxona Wi-Fi infratuzilmasi qo‘llanadi.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 14: TEKSHIRISH (VERIFIKATSIYA & VALIDATSIYA)
+           =================================================================== -->
+      <section class="slide" data-slide="14">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 14</span>
+          <span class="slide-topic-title">Sinov & Sifat Nazorati</span>
+        </div>
+        <h2 class="slide-title">Tekshirish: Verifikatsiya va Validatsiya</h2>
+        <p class="slide-subtitle">
+          Muhandislik tizimining texnik to‘g‘riligi va haqiqiy muammoni hal qilganligini tasdiqlash.
+        </p>
+
+        <div class="slide-content">
+          <div class="grid-2">
+            <!-- Verifikatsiya -->
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
+                <div>
+                  <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--primary-light); font-weight: 700;">Texnik tekshiruv</div>
+                  <div class="card-heading" style="margin-bottom: 0;">Verifikatsiya</div>
+                </div>
+                <span class="tag tag-blue">"Biz tizimni to‘g‘ri qurdikmi?"</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; gap: 10px; font-size: 0.88rem; color: var(--text-main);">
+                  <span style="color: var(--accent-emerald); font-weight: bold;">&check;</span>
+                  <span><strong>Pressure sensor:</strong> ma’lumot o‘lchayaptimi?</span>
+                </div>
+                <div style="display: flex; gap: 10px; font-size: 0.88rem; color: var(--text-main);">
+                  <span style="color: var(--accent-emerald); font-weight: bold;">&check;</span>
+                  <span><strong>ESP32:</strong> ma’lumotni qabul qilyaptimi?</span>
+                </div>
+                <div style="display: flex; gap: 10px; font-size: 0.88rem; color: var(--text-main);">
+                  <span style="color: var(--accent-emerald); font-weight: bold;">&check;</span>
+                  <span><strong>Wi-Fi aloqa:</strong> ma’lumot yuborilyaptimi?</span>
+                </div>
+                <div style="display: flex; gap: 10px; font-size: 0.88rem; color: var(--text-main);">
+                  <span style="color: var(--accent-emerald); font-weight: bold;">&check;</span>
+                  <span><strong>Cloud:</strong> ma’lumotni qabul qilyaptimi?</span>
+                </div>
+                <div style="display: flex; gap: 10px; font-size: 0.88rem; color: var(--text-main);">
+                  <span style="color: var(--accent-emerald); font-weight: bold;">&check;</span>
+                  <span><strong>Notification:</strong> xodimga yetib boryaptimi?</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Validatsiya -->
+            <div class="card" style="border-color: var(--border-glow);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
+                <div>
+                  <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--accent-emerald); font-weight: 700;">Amaliy natija</div>
+                  <div class="card-heading" style="margin-bottom: 0;">Validatsiya</div>
+                </div>
+                <span class="tag tag-emerald">"To‘g‘ri muammoni hal qildikmi?"</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; gap: 10px; font-size: 0.88rem; color: var(--text-main);">
+                  <span style="color: var(--accent-emerald); font-weight: bold;">&check;</span>
+                  <span><strong>Oqish:</strong> haqiqatan o‘z vaqtida aniqlanyaptimi?</span>
+                </div>
+                <div style="display: flex; gap: 10px; font-size: 0.88rem; color: var(--text-main);">
+                  <span style="color: var(--accent-emerald); font-weight: bold;">&check;</span>
+                  <span><strong>Xodim:</strong> tez xabardor bo‘lib harakat qilyaptimi?</span>
+                </div>
+                <div style="display: flex; gap: 10px; font-size: 0.88rem; color: var(--text-main);">
+                  <span style="color: var(--accent-emerald); font-weight: bold;">&check;</span>
+                  <span><strong>Muammo joyi:</strong> Pipe ID orqali aniqlash osonlashyaptimi?</span>
+                </div>
+                <div style="display: flex; gap: 10px; font-size: 0.88rem; color: var(--text-main);">
+                  <span style="color: var(--accent-emerald); font-weight: bold;">&check;</span>
+                  <span><strong>Suv isrofi:</strong> amalda sezilarli kamayishiga yordam beryaptimi?</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SLAYD 15: TAKOMILLASHTIRISH VA XULOSA
+           =================================================================== -->
+      <section class="slide" data-slide="15">
+        <div class="slide-badge-row">
+          <span class="slide-number-pill">Slayd 15</span>
+          <span class="slide-topic-title">Takrorlanuvchi Sikl & Xulosa</span>
+        </div>
+        <h2 class="slide-title">Takomillashtirish sikli va yakuniy xulosa</h2>
+        <p class="slide-subtitle">
+          Tizim bir martalik loyiha emas — u doimiy ma’lumotlar tahlili orqali takomillashib boruvchi sikldir.
+        </p>
+
+        <div class="slide-content">
+          <!-- 7-Bosqichli Takomillashtirish Sikli -->
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 18px;">
+            <div class="card" style="flex: 1; padding: 12px 8px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-weight: 800; color: var(--primary-light); font-size: 0.8rem;">01</div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-pure);">Sensor Ma’lumotlari</div>
+            </div>
+            <div style="color: var(--accent-cyan); font-weight: bold;">&rarr;</div>
+            <div class="card" style="flex: 1; padding: 12px 8px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-weight: 800; color: var(--primary-light); font-size: 0.8rem;">02</div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-pure);">Muammoni Tahlil Qilish</div>
+            </div>
+            <div style="color: var(--accent-cyan); font-weight: bold;">&rarr;</div>
+            <div class="card" style="flex: 1; padding: 12px 8px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-weight: 800; color: var(--primary-light); font-size: 0.8rem;">03</div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-pure);">Xatolarni Aniqlash</div>
+            </div>
+            <div style="color: var(--accent-cyan); font-weight: bold;">&rarr;</div>
+            <div class="card" style="flex: 1; padding: 12px 8px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-weight: 800; color: var(--primary-light); font-size: 0.8rem;">04</div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-pure);">AI/Parametrlarni Yaxshilash</div>
+            </div>
+            <div style="color: var(--accent-cyan); font-weight: bold;">&rarr;</div>
+            <div class="card" style="flex: 1; padding: 12px 8px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-weight: 800; color: var(--primary-light); font-size: 0.8rem;">05</div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-pure);">Yangi Talablar</div>
+            </div>
+            <div style="color: var(--accent-cyan); font-weight: bold;">&rarr;</div>
+            <div class="card" style="flex: 1; padding: 12px 8px; text-align: center;">
+              <div style="font-family: var(--font-mono); font-weight: 800; color: var(--primary-light); font-size: 0.8rem;">06</div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-pure);">Tizimni Takomillashtirish</div>
+            </div>
+            <div style="color: var(--accent-cyan); font-weight: bold;">&rarr;</div>
+            <div class="card" style="flex: 1; padding: 12px 8px; text-align: center; border-color: var(--accent-emerald);">
+              <div style="font-family: var(--font-mono); font-weight: 800; color: var(--accent-emerald); font-size: 0.8rem;">07</div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: var(--accent-emerald);">Qayta Tekshirish</div>
+            </div>
+          </div>
+
+          <!-- Yakuniy Xulosa Banneri -->
+          <div class="card card-highlight" style="padding: 18px 24px;">
+            <div style="font-size: 0.78rem; text-transform: uppercase; color: var(--accent-cyan); font-weight: 800; letter-spacing: 0.05em; margin-bottom: 6px;">
+              Yakuniy Maqsad & Muhandislik Tafakkuri
+            </div>
+            <p style="font-size: 0.98rem; color: var(--text-main); line-height: 1.55;">
+              Taqdimot shunchaki bitta texnik g‘oyani ko‘rsatmaydi. U <strong>muammoni qanday aniqlaganimiz, nima sababdan yuzaga kelishini qanday tushunganimiz, bir nechta yechimlarni qanday taqqoslaganimiz va yakuniy tanlovni qanday asoslaganimizni</strong> to‘liq aks ettiradi.
+            </p>
+
+            <!-- Complete Logical Chain Ribbon -->
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-dim); line-height: 1.5;">
+                MUAMMO &rarr; SABABLAR &rarr; STAKEHOLDERLAR &rarr; CHEKLOV &rarr; 3 YECHIM &rarr; 1-YECHIM ARXITEKTURA &rarr; 2-YECHIM TAHLIL &rarr; 3-YECHIM TAHLIL &rarr; MEZONLAR &rarr; DECISION MATRIX &rarr; TRADE-OFF &rarr; ASOSLANGAN TANLOV &rarr; V&V &rarr; TAKOMILLASHTIRISH
+              </div>
+              <span class="tag tag-emerald">Muhandislik Yakunlandi &bull; 2026</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Controls & Indicators -->
+    <footer class="deck-bottombar">
+      <div class="slide-counter-wrapper">
+        <div class="slide-digits">
+          Slayd <strong id="currentSlideNum">01</strong> / <span id="totalSlidesNum">15</span>
+        </div>
+        <div class="deck-progress-track">
+          <div class="deck-progress-fill" id="progressFill"></div>
+        </div>
+        <div class="key-shortcuts-badge">
+          <span class="k-key">&larr;</span> <span class="k-key">&rarr;</span> yoki <span class="k-key">Space</span>
+        </div>
+      </div>
+
+      <div class="nav-buttons-group">
+        <button class="btn-nav" id="btnPrev" title="Oldingi slayd (&larr;)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          Oldingi
+        </button>
+        <button class="btn-nav" id="btnNext" title="Keyingi slayd (&rarr; yoki Space)">
+          Keyingi
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Overview Modal Drawer -->
+  <div class="overview-modal" id="overviewModal">
+    <div class="overview-header">
+      <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-pure);">Slaydlar Rejasi (15 ta slayd)</div>
+      <button class="btn-tool" id="btnCloseOverview" style="font-size: 0.95rem; padding: 7px 14px;">
+        Yopish &times;
+      </button>
+    </div>
+    <div class="overview-grid" id="overviewGrid"></div>
+  </div>
+
+  <!-- ===================================================================
+       CLIENT-SIDE PRESENTATION LOGIC, AUDIO ENGINE & THEME MANAGER
+       =================================================================== -->
+  <script>
+    (function() {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const totalSlides = slides.length;
+      let currentIndex = 0;
+      let soundEnabled = true;
+      let laserActive = false;
+
+      // Timer State
+      let timerSeconds = 0;
+      let timerRunning = true;
+      let timerInterval = null;
+
+      const currentSlideNumEl = document.getElementById('currentSlideNum');
+      const totalSlidesNumEl = document.getElementById('totalSlidesNum');
+      const progressFillEl = document.getElementById('progressFill');
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+      const btnOverview = document.getElementById('btnOverview');
+      const btnCloseOverview = document.getElementById('btnCloseOverview');
+      const overviewModal = document.getElementById('overviewModal');
+      const overviewGrid = document.getElementById('overviewGrid');
+      const btnFullscreen = document.getElementById('btnFullscreen');
+      const btnSound = document.getElementById('btnSound');
+      const btnLaser = document.getElementById('btnLaser');
+      const laserPointer = document.getElementById('laserPointer');
+      const timerBadge = document.getElementById('timerBadge');
+      const timerText = document.getElementById('timerText');
+
+      // Theme Elements
+      const btnThemePicker = document.getElementById('btnThemePicker');
+      const themeDropdown = document.getElementById('themeDropdown');
+      const activeThemeLabel = document.getElementById('activeThemeLabel');
+      const themeRows = Array.from(document.querySelectorAll('.theme-option-row'));
+
+      totalSlidesNumEl.textContent = String(totalSlides).padStart(2, '0');
+
+      // Web Audio API Sound Synthesizer
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      let audioCtx = null;
+
+      function playUiBeep(freq = 600, duration = 0.05, type = 'sine') {
+        if (!soundEnabled) return;
+        try {
+          if (!audioCtx) audioCtx = new AudioCtx();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch (e) {
+          // Audio blocked
+        }
+      }
+
+      function playThemeChime() {
+        if (!soundEnabled) return;
+        try {
+          if (!audioCtx) audioCtx = new AudioCtx();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          [523.25, 659.25, 783.99].forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.06);
+            gain.gain.setValueAtTime(0.04, audioCtx.currentTime + idx * 0.06);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.06 + 0.18);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(audioCtx.currentTime + idx * 0.06);
+            osc.stop(audioCtx.currentTime + idx * 0.06 + 0.18);
+          });
+        } catch(e) {}
+      }
+
+      // ===================================================================
+      // THEME SYSTEM (10 Themes)
+      // ===================================================================
+      const themesMap = {
+        'cyber-blue': 'Cyber Blue',
+        'gamma-light': 'Gamma Light',
+        'nordic-charcoal': 'Nordic Charcoal',
+        'onyx': 'Onyx',
+        'alien': 'Alien',
+        'aurum': 'Aurum',
+        'shadow': 'Shadow',
+        'emerald-oasis': 'Emerald Oasis',
+        'sunset-solar': 'Sunset Solar',
+        'cosmic-amethyst': 'Cosmic Amethyst'
+      };
+
+      function applyTheme(themeId) {
+        if (!themesMap[themeId]) themeId = 'cyber-blue';
+        document.documentElement.setAttribute('data-theme', themeId);
+        activeThemeLabel.textContent = themesMap[themeId];
+
+        themeRows.forEach(row => {
+          row.classList.toggle('active', row.dataset.themeId === themeId);
+        });
+
+        localStorage.setItem('presentation-theme', themeId);
+      }
+
+      function toggleThemeDropdown() {
+        const isOpen = themeDropdown.classList.contains('open');
+        if (isOpen) {
+          closeThemeDropdown();
+        } else {
+          themeDropdown.classList.add('open');
+          playUiBeep(700, 0.04);
+        }
+      }
+
+      function closeThemeDropdown() {
+        themeDropdown.classList.remove('open');
+      }
+
+      btnThemePicker.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleThemeDropdown();
+      });
+
+      themeRows.forEach(row => {
+        row.addEventListener('click', () => {
+          const tid = row.dataset.themeId;
+          applyTheme(tid);
+          playThemeChime();
+          closeThemeDropdown();
+        });
+      });
+
+      // Close dropdown on outside click
+      document.addEventListener('click', (e) => {
+        if (!themeDropdown.contains(e.target) && !btnThemePicker.contains(e.target)) {
+          closeThemeDropdown();
+        }
+      });
+
+      // Load saved theme from localStorage
+      const savedTheme = localStorage.getItem('presentation-theme') || 'cyber-blue';
+      applyTheme(savedTheme);
+
+      // Slide Metadata (15 Slides)
+      const slideList = [
+        "01. Loyiha Kirish & Title",
+        "02. Asosiy Muammo & Dolzarblik",
+        "03. Sabab-Oqibat Zanjiri",
+        "04. Manfaatdor Tomonlar (Stakeholders)",
+        "05. Asosiy Cheklov: Byudjet",
+        "06. Taklif Qilingan 3 Ta Yechim",
+        "07. 1-Yechim IoT Arxitekturasi",
+        "08. 2-Yechim: Chaqiruv Tugmalari (Tahlil)",
+        "09. 3-Yechim: Mas’ul Santexnik (Tahlil)",
+        "10. Baholash Mezonlari (0-5)",
+        "11. Decision Matrix (16 vs 13 vs 9)",
+        "12. Muhandislik Trade-off Murosalari",
+        "13. Asoslangan Tanlov Formulalari",
+        "14. Tekshirish: Verifikatsiya & Validatsiya",
+        "15. Takomillashtirish Sikli & Xulosa"
+      ];
+
+      // Build Overview Drawer
+      slideList.forEach((title, idx) => {
+        const item = document.createElement('div');
+        item.className = `overview-card ${idx === 0 ? 'active' : ''}`;
+        item.dataset.index = idx;
+        item.innerHTML = `
+          <div class="num">SLAYD ${String(idx + 1).padStart(2, '0')}</div>
+          <div class="title">${title}</div>
+        `;
+        item.addEventListener('click', () => {
+          goToSlide(idx);
+          closeOverview();
+        });
+        overviewGrid.appendChild(item);
+      });
+
+      function updateSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+
+        slides.forEach((slide, i) => {
+          slide.classList.remove('active', 'prev');
+          if (i === index) {
+            slide.classList.add('active');
+          } else if (i < index) {
+            slide.classList.add('prev');
+          }
+        });
+
+        currentIndex = index;
+        currentSlideNumEl.textContent = String(index + 1).padStart(2, '0');
+        const percent = ((index + 1) / totalSlides) * 100;
+        progressFillEl.style.width = `${percent}%`;
+
+        btnPrev.disabled = index === 0;
+        btnNext.disabled = index === totalSlides - 1;
+
+        const cards = overviewGrid.querySelectorAll('.overview-card');
+        cards.forEach((c, i) => {
+          c.classList.toggle('active', i === index);
+        });
+
+        playUiBeep(index === 0 ? 440 : 580, 0.04);
+      }
+
+      function nextSlide() {
+        if (currentIndex < totalSlides - 1) updateSlide(currentIndex + 1);
+      }
+
+      function prevSlide() {
+        if (currentIndex > 0) updateSlide(currentIndex - 1);
+      }
+
+      function goToSlide(idx) {
+        updateSlide(idx);
+      }
+
+      function openOverview() {
+        overviewModal.classList.add('open');
+        playUiBeep(750, 0.06);
+      }
+
+      function closeOverview() {
+        overviewModal.classList.remove('open');
+      }
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          if (document.exitFullscreen) document.exitFullscreen();
+        }
+      }
+
+      // Laser Pointer Mode
+      function toggleLaser() {
+        laserActive = !laserActive;
+        btnLaser.classList.toggle('active', laserActive);
+        laserPointer.style.display = laserActive ? 'block' : 'none';
+        document.body.style.cursor = laserActive ? 'none' : 'default';
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        if (!laserActive) return;
+        laserPointer.style.left = e.clientX + 'px';
+        laserPointer.style.top = e.clientY + 'px';
+      });
+
+      // Sound Toggle
+      btnSound.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        btnSound.innerHTML = soundEnabled 
+          ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> Ovoz: Yoqiq`
+          : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg> Ovoz: O‘chiq`;
+        btnSound.classList.toggle('active', soundEnabled);
+        if (soundEnabled) playUiBeep(800, 0.06);
+      });
+
+      // Timer Logic
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          if (!timerRunning) return;
+          timerSeconds++;
+          const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+          const secs = String(timerSeconds % 60).padStart(2, '0');
+          timerText.textContent = `${mins}:${secs}`;
+        }, 1000);
+      }
+      timerBadge.addEventListener('click', () => {
+        timerRunning = !timerRunning;
+        timerBadge.style.opacity = timerRunning ? '1' : '0.6';
+      });
+      startTimer();
+
+      // Listeners
+      btnNext.addEventListener('click', nextSlide);
+      btnPrev.addEventListener('click', prevSlide);
+      btnOverview.addEventListener('click', openOverview);
+      btnCloseOverview.addEventListener('click', closeOverview);
+      btnFullscreen.addEventListener('click', toggleFullscreen);
+      btnLaser.addEventListener('click', toggleLaser);
+
+      // Keyboard Controls
+      window.addEventListener('keydown', (e) => {
+        if (overviewModal.classList.contains('open')) {
+          if (e.key === 'Escape' || e.key === 'o' || e.key === 'O') closeOverview();
+          return;
+        }
+
+        if (themeDropdown.classList.contains('open')) {
+          if (e.key === 'Escape' || e.key === 't' || e.key === 'T') {
+            closeThemeDropdown();
+            return;
+          }
+        }
+
+        switch (e.key) {
+          case 'ArrowRight':
+          case 'ArrowDown':
+          case ' ':
+          case 'PageDown':
+            e.preventDefault();
+            nextSlide();
+            break;
+          case 'ArrowLeft':
+          case 'ArrowUp':
+          case 'PageUp':
+          case 'Backspace':
+            e.preventDefault();
+            prevSlide();
+            break;
+          case 'Home':
+            e.preventDefault();
+            goToSlide(0);
+            break;
+          case 'End':
+            e.preventDefault();
+            goToSlide(totalSlides - 1);
+            break;
+          case 'f':
+          case 'F':
+            toggleFullscreen();
+            break;
+          case 'o':
+          case 'O':
+            openOverview();
+            break;
+          case 't':
+          case 'T':
+            toggleThemeDropdown();
+            break;
+          case 'l':
+          case 'L':
+            toggleLaser();
+            break;
+          case 's':
+          case 'S':
+            btnSound.click();
+            break;
+          case 'Escape':
+            closeOverview();
+            closeThemeDropdown();
+            if (laserActive) toggleLaser();
+            break;
+        }
+      });
+
+      // Start on Slide 1
+      updateSlide(0);
+    })();
+  </script>
+</body>
+</html>
